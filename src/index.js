@@ -1,5 +1,5 @@
 import express from "express";
-import * as path from "node:path"
+import * as path from "node:path";
 
 const app = express()
 app.use(express.static(path.join(import.meta.dirname, "static")))
