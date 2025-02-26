@@ -1,6 +1,7 @@
 import express from "express";
 import * as path from "node:path";
 import { userCollection } from "./mongodb.js";
+import hashPassword from "./hashPassword.js";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -13,7 +14,7 @@ app.post("/login.html", async (request, response) => {
     if (user === null) {
         response.status(401).send("User does not exist").end();
         return;
-    } else if (user.password !== password) {
+    } else if (user.password !== hashPassword(password)) {
         response.status(401).send("Incorrect password").end();
         return;
     }
