@@ -15,10 +15,19 @@ app.post("/login.html", async (request, response) => {
         response.status(401).send("User does not exist").end();
         return;
     } else if (user.password !== hashPassword(password)) {
-        response.status(401).send("Incorrect password").end();
+        // Check if login > 3
+        console.log(user)
+        if ((user.failedLoginAttempts ?? 0) >= 2) {
+            await userCollection.deleteOne({ username });
+            response.status(401).send("Yippie! Three failed attempts, account deleted! :)").end();
+        } else {
+            await userCollection.updateOne({ username }, { $inc: { failedLoginAttempts: 1 }})
+            response.status(401).send("Incorrect password").end();
+        }
         return;
     }
     // On successfull login, redirect to the gallery
+    await userCollection.updateOne({username}, { $set: {failedLoginAttempts: 0 }})
     response.redirect(302, "/gallery.html"); // Temporary redirect
 });
 
