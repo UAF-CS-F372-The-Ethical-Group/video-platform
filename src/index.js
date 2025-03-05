@@ -2,6 +2,7 @@ import express from "express";
 import * as path from "node:path";
 import { userCollection } from "./mongodb.js";
 import hashPassword from "./hashPassword.js";
+import validatePassword from "./validatePassword.js";
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -9,6 +10,11 @@ app.use(express.static(path.join(import.meta.dirname, "static")));
 
 app.post("/login.html", async (request, response) => {
     const { username, password } = request.body;
+
+    if (!validatePassword(password)) {
+        response.status(400).send("Password does not match complexity requirements.").end();
+        return;
+    }
 
     const user = await userCollection.findOne({ username });
     if (user === null) {
