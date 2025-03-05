@@ -1,5 +1,9 @@
 /**
- * 
+ * Contains functions that assist in validating password complexity
+ */
+
+/**
+ * Validates the complexity of the provided password
  * @param {string} password The password to validate
  * @returns {boolean}
  */

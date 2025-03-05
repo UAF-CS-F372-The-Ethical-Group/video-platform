@@ -1,3 +1,8 @@
+/**
+ * Exports variables that allow easier access to MongoDB and data in
+ * the database.
+ */
+
 import { MongoClient } from "mongodb";
 
 export const client = new MongoClient("mongodb://localhost:27017");

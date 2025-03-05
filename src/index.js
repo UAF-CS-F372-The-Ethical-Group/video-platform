@@ -1,3 +1,8 @@
+/**
+ * Implementation of application routing, handling, and
+ * authentication.
+ */
+
 import express from "express";
 import * as path from "node:path";
 import { userCollection } from "./mongodb.js";
@@ -12,7 +17,10 @@ app.post("/login.html", async (request, response) => {
     const { username, password } = request.body;
 
     if (!validatePassword(password)) {
-        response.status(400).send("Password does not match complexity requirements.").end();
+        response
+            .status(400)
+            .send("Password does not match complexity requirements.")
+            .end();
         return;
     }
 
@@ -24,15 +32,24 @@ app.post("/login.html", async (request, response) => {
         // Check if login > 3
         if ((user.failedLoginAttempts ?? 0) >= 2) {
             await userCollection.deleteOne({ username });
-            response.status(401).send("Yippie! Three failed attempts, account deleted! :)").end();
+            response
+                .status(401)
+                .send("Three failed attempts, account deleted! :)")
+                .end();
         } else {
-            await userCollection.updateOne({ username }, { $inc: { failedLoginAttempts: 1 } });
+            await userCollection.updateOne(
+                { username },
+                { $inc: { failedLoginAttempts: 1 } }
+            );
             response.status(401).send("Incorrect password").end();
         }
         return;
     }
     // On successfull login, redirect to the gallery
-    await userCollection.updateOne({ username }, { $set: { failedLoginAttempts: 0 } });
+    await userCollection.updateOne(
+        { username },
+        { $set: { failedLoginAttempts: 0 } }
+    );
     response.redirect(302, "/gallery.html"); // Temporary redirect
 });
 

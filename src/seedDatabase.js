@@ -1,4 +1,6 @@
-// Adds filler data to the database to ease the development process.
+/**
+ * Adds sample data to the database to ease the development process.
+ */
 
 import hashPassword from "./hashPassword.js";
 import { client, db } from "./mongodb.js";
