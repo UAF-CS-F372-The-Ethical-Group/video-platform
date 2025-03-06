@@ -9,7 +9,7 @@ await db.dropCollection("users");
 const userCollection = await db.createCollection("users");
 await userCollection.insertOne({
     username: "email@example.com",
-    password: hashPassword("password")
+    password: hashPassword("ABCabc1!")
 });
 
 await client.close();
