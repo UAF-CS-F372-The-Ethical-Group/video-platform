@@ -33,7 +33,8 @@ npm run change-password <username> <password>
 
 - title
 - genre
-- filePath
+- videoPath
+- thumbnailPath
 
 ### Like collection
 
