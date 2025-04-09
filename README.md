@@ -27,6 +27,7 @@ npm run change-password <username> <password>
 - username
 - password (hashed)
 - failedLoginAttempts (integer, optional)
+- role (either "viewer", "marketing", or "editor")
 
 ### Movies collection
 
@@ -38,4 +39,4 @@ npm run change-password <username> <password>
 
 - user (user._id)
 - movie (movie._id)
-- status (bolean, true = liked, false = disliked)
+- status (boolean, true = liked, false = disliked)

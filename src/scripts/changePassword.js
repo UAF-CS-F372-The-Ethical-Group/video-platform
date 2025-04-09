@@ -3,8 +3,8 @@
  * from the command line
  */
 
-import { client, userCollection } from "./mongodb.js";
-import hashPassword from "./hashPassword.js";
+import { client, userCollection } from "../mongodb.js";
+import hashPassword from "../hashPassword.js";
 
 if (process.argv.length !== 4) {
     console.error(
