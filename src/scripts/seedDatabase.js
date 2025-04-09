@@ -13,21 +13,23 @@ await userCollection.insertOne({
 });
 
 
-await movieCollection.insertMany([{
-    title: "Ducky",
-    genre: "Birds",
-    videoPath: "/src/static/data/265501_tiny.mp4",
-    thumbnailPath: "/src/static/data/265501_tiny_thumb.png"
-}, {
-    title: "Waves",
-    genre: "Water",
-    videoPath: "/src/static/data/244839_tiny.mp4",
-    thumbnailPath: "/src/static/data/244839_tiny_thumb.png"
-}, {
-    title: "Waterfall",
-    genre: "Water",
-    videoPath: "/src/static/data/246856_tiny_.mp4",
-    thumbnailPath: "/src/static/data/246856_tiny_thumb.png"
-},]);
+await movieCollection.insertMany([
+    {
+        title: "Ducky",
+        genre: "Birds",
+        videoPath: "/src/static/data/265501_tiny.mp4",
+        thumbnailPath: "/src/static/data/265501_tiny_thumb.png"
+    }, {
+        title: "Waves",
+        genre: "Water",
+        videoPath: "/src/static/data/244839_tiny.mp4",
+        thumbnailPath: "/src/static/data/244839_tiny_thumb.png"
+    }, {
+        title: "Waterfall",
+        genre: "Water",
+        videoPath: "/src/static/data/246856_tiny_.mp4",
+        thumbnailPath: "/src/static/data/246856_tiny_thumb.png"
+    },
+]);
 
 await client.close();
