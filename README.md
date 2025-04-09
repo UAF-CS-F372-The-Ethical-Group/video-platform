@@ -1,9 +1,11 @@
 # video-platform
 
 ## Documentation
+
 Documentation is contained in the [docs](./docs) directory.
 
 ## Development
+
 ```bash
 # To start the dev server
 npm run dev
@@ -16,5 +18,24 @@ npm run seed-database
 
 # Change user password
 npm run change-password <username> <password>
-
 ```
+
+## Database schema
+
+### User collection
+
+- username
+- password (hashed)
+- failedLoginAttempts (integer, optional)
+
+### Movies collection
+
+- title
+- genre
+- filePath
+
+### Like collection
+
+- user (user._id)
+- movie (movie._id)
+- status (bolean, true = liked, false = disliked)
