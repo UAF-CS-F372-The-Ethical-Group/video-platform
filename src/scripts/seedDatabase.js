@@ -6,6 +6,8 @@ import hashPassword from "../hashPassword.js";
 import { client, db, movieCollection } from "../mongodb.js";
 
 await db.dropCollection("users");
+await db.dropCollection("movies");
+await db.dropCollection("likes");
 const userCollection = await db.createCollection("users");
 await userCollection.insertOne({
     username: "email@example.com",
