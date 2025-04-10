@@ -2,7 +2,7 @@ import hashPassword from "../hashPassword.js";
 import { userCollection } from "../mongodb.js";
 import validatePassword from "../validatePassword.js";
 
-export async function loginPost (request, response) {
+export async function loginPost(request, response) {
     const { username, password } = request.body;
 
     if (!validatePassword(password)) {
@@ -34,11 +34,16 @@ export async function loginPost (request, response) {
         }
         return;
     }
-    // On successfull login, redirect to the gallery
+
+    // Reset the login attempts to zero
     await userCollection.updateOne(
         { username },
         { $set: { failedLoginAttempts: 0 } }
     );
-    response.redirect(302, "/gallery.html"); // Temporary redirect
 
+    // Update the user session to show that the user is logged in
+    request.session.user = user._id;
+
+    // On successfull login, redirect to the gallery
+    response.redirect(302, "/gallery.html"); // Temporary redirect
 }
