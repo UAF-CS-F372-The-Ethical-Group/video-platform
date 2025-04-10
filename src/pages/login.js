@@ -42,7 +42,7 @@ export async function loginPost(request, response) {
     );
 
     // Update the user session to show that the user is logged in
-    request.session.user = user._id;
+    request.session.userId = user._id;
 
     // On successfull login, redirect to the gallery
     response.redirect(302, "/gallery.html"); // Temporary redirect
