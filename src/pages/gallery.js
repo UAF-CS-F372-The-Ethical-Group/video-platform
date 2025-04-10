@@ -17,17 +17,17 @@ import { join } from "node:path";
 /**
  * Fetch the favorite movies for the specified user
  * @param {ObjectId} userId
+ * @param {string} filter The string to filter movies by
  * @returns {Promise<Array<Movie>>}
  */
-async function getFavorites(userId) {
-    const movieLikesCursor = likeCollection.aggregate([
+async function getFavorites(userId, filter) {
+    const pipeline = [
         {
             $match: {
                 userId: userId,
                 status: true
             }
         },
-        { $sort: { title: 1 } },
         {
             $lookup: {
                 from: "movies",
@@ -35,18 +35,42 @@ async function getFavorites(userId) {
                 foreignField: "_id",
                 as: "movieDocument"
             }
-        }
-    ]);
+        },
+        { $sort: { "movieDocument.title": 1 } },
+    ];
+    if (filter) {
+        pipeline.push({
+            $match: {
+                "movieDocument.title": {
+                    $regex: filter,
+                    $options: "i"
+                }
+            }
+        });
+    }
+    const movieLikesCursor = likeCollection.aggregate(pipeline);
     const movieLikes = await movieLikesCursor.toArray();
     return movieLikes.map(like => like.movieDocument).flat();
 }
 
 /**
  * Fetch all movies, sorted alphabetically
+ * @param {string} filter The string to filter movies by
  * @returns {Promise<Array<Movie>>}
  */
-async function getMovies() {
-    const cursor = await movieCollection.aggregate([{ $sort: { title: 1 } }]);
+async function getMovies(filter) {
+    const pipeline = [{ $sort: { title: 1 } }];
+    if (filter) {
+        pipeline.unshift({
+            $match: {
+                title: {
+                    $regex: filter,
+                    $options: "i"
+                }
+            }
+        });
+    }
+    const cursor = await movieCollection.aggregate(pipeline);
     return await cursor.toArray();
 }
 
@@ -82,13 +106,16 @@ export async function renderGallery(request, response) {
         return;
     }
 
-    const favoriteMovies = await getFavorites(user._id);
+    const searchString = request.query.search ?? "";
+
+    const favoriteMovies = await getFavorites(user._id, searchString);
     const favoriteMoviesHtml = favoriteMovies.map(generateThumbnailHtml).join("");
-    const allMovies = await getMovies();
+    const allMovies = await getMovies(searchString);
     const allMoviesHtml = allMovies.map(generateThumbnailHtml).join("");
 
     const templateHtml = (await readFile(join(import.meta.dirname, "../static/gallery.html"))).toString();
     const renderedHtml = templateHtml
+        .replace("<!-- SLOT-GALLERY-SEARCH -->", searchString)
         .replace("<!-- SLOT-GALLERY-FAVORITES -->", favoriteMoviesHtml)
         .replace("<!-- SLOT-GALLERY-MOVIES -->", allMoviesHtml);
     response.send(renderedHtml);

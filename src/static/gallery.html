@@ -13,6 +13,14 @@
 </head>
 <body>
     <h1 id="gallery-header">Gallery</h1>
+    <form method="get">
+        <fieldset id="search-form">
+            <legend>Search</legend>
+            <label for="search">Query</label>
+            <input type="text" name="search" id="search" value="<!-- SLOT-GALLERY-SEARCH -->">
+            <input type="submit">
+        </fieldset>
+    </form>
     <h2>Your Favorites</h2>
     <section class="gallery-list">
         <!-- SLOT-GALLERY-FAVORITES -->
