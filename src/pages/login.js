@@ -8,7 +8,9 @@ import { userCollection } from "../mongodb.js";
 import validatePassword from "../validatePassword.js";
 
 /**
- * Processes valid/invalid user login
+ * Checks user authentication and returns an HTML page
+ * with the movie gallery on successful login. User account
+ * is deleted after 3 failed login attempts otherwise.
  * @param {*} request 
  * @param {*} response 
  * @returns 
@@ -50,12 +52,13 @@ export async function loginPost(request, response) {
     // Update the user session to show that the user is logged in
     request.session.userId = user._id;
 
-    // On successfull login, redirect to the gallery
+    // On successful login, redirect to the gallery
     response.redirect(302, "/gallery.html"); // Temporary redirect
 }
 
 /**
- * Processes registration of new accounts
+ * Processes registration of new user accounts and seeds the data 
+ * in the database.
  * @param {*} request 
  * @param {*} response 
  * @returns 
