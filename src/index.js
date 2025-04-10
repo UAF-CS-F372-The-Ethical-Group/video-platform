@@ -23,6 +23,7 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/login.html", loginPost);
+app.get("/gallery.html", renderGallery);
 
 app.get("/whoami", (request, response) => {
     response.send(request.session).end();
