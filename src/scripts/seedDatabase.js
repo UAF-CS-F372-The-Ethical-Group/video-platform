@@ -11,7 +11,8 @@ await db.dropCollection("likes");
 const userCollection = await db.createCollection("users");
 await userCollection.insertOne({
     username: "email@example.com",
-    password: hashPassword("ABCabc1!")
+    password: hashPassword("ABCabc1!"),
+    role: "viewer"
 });
 
 
