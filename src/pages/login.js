@@ -83,5 +83,5 @@ export async function registerPost (request, response) {
         role: "viewer"
     });
 
-    response.send("User registered successfully!").end();
+    response.status(200).send("User registered successfully!").end();
 }
