@@ -41,6 +41,17 @@ npm run change-role <username> <role>
 
 ### Like collection
 
-- user (user._id)
-- movie (movie._id)
+- userId (user._id)
+- movieId (movie._id)
 - status (boolean, true = liked, false = disliked)
+
+## Session data schema
+
+The user session, available on `request.session` inside a route handler, has the
+following properties:
+
+```ts
+interface Session {
+    userId: string; // The ID of the currently authenticated user
+}
+```
