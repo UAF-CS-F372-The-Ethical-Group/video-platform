@@ -12,7 +12,8 @@ const userCollection = await db.createCollection("users");
 
 const createdUser = await userCollection.insertOne({
     username: "email@example.com",
-    password: hashPassword("ABCabc1!")
+    password: hashPassword("ABCabc1!"),
+    role: "viewer"
 });
 
 const createdMovieResponse = await movieCollection.insertMany([
