@@ -18,7 +18,7 @@ export async function loginPost (request, response) {
 
     const user = await userCollection.findOne({ username });
     if (user === null) {
-        response.status(401).send("User does not exist").end();
+        response.status(401).send("User does not exist.").end();
         return;
     } else if (user.password !== hashPassword(password)) {
         // Check if login > 3
@@ -33,11 +33,14 @@ export async function loginPost (request, response) {
                 { username },
                 { $inc: { failedLoginAttempts: 1 } }
             );
-            response.status(401).send("Incorrect password").end();
+            response
+                .status(401)
+                .send("Incorrect password! Please try again.")
+                .end();
         }
         return;
     }
-    // On successfull login, redirect to the gallery
+    // On successful login, redirect to the gallery
     await userCollection.updateOne(
         { username },
         { $set: { failedLoginAttempts: 0 } }
@@ -53,11 +56,11 @@ export async function loginPost (request, response) {
  * @returns 
  */
 export async function registerPost (request, response) {
-    const { username, password } = request.body;
+    const { username, password , confirmPassword } = request.body;
 
     const user = await userCollection.findOne({username});
     if (user) {
-        response.status(400).send("Username already taken").end();
+        response.status(400).send("Username already taken.").end();
         return;
     }
 
@@ -73,6 +76,14 @@ export async function registerPost (request, response) {
                 - 1 number<br>
                 - 1 special character: !@#$%^&*()_+.
                 `)
+            .end();
+        return;
+    }
+
+    if(password !== confirmPassword) {
+        response
+            .status(400)
+            .send("Passwords do not match! Please try again.")
             .end();
         return;
     }
