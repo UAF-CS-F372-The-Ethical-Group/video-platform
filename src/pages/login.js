@@ -1,17 +1,20 @@
+/**
+ * Contains functions that process user login and registration
+ * for authentication.
+ */
+
 import hashPassword from "../hashPassword.js";
 import { userCollection } from "../mongodb.js";
 import validatePassword from "../validatePassword.js";
 
+/**
+ * Processes valid/invalid user login
+ * @param {*} request 
+ * @param {*} response 
+ * @returns 
+ */
 export async function loginPost (request, response) {
     const { username, password } = request.body;
-
-    if (!validatePassword(password)) {
-        response
-            .status(400)
-            .send("Password does not match complexity requirements.")
-            .end();
-        return;
-    }
 
     const user = await userCollection.findOne({ username });
     if (user === null) {
@@ -41,4 +44,44 @@ export async function loginPost (request, response) {
     );
     response.redirect(302, "/gallery.html"); // Temporary redirect
 
+}
+
+/**
+ * Processes registration of new accounts
+ * @param {*} request 
+ * @param {*} response 
+ * @returns 
+ */
+export async function registerPost (request, response) {
+    const { username, password } = request.body;
+
+    const user = await userCollection.findOne({username});
+    if (user) {
+        response.status(400).send("Username already taken").end();
+        return;
+    }
+
+    if (!validatePassword(password)) {
+        response
+            .status(400)
+            .send(`Password does not match complexity requirements.
+                <br>
+                Password must have:<br>
+                - Only 8 characters<br>
+                - 1 capital letter<br>
+                - 1 lowercase letter<br>
+                - 1 number<br>
+                - 1 special character: !@#$%^&*()_+.
+                `)
+            .end();
+        return;
+    }
+
+    await userCollection.insertOne({
+        username: username,
+        password: hashPassword(password),
+        role: "viewer"
+    });
+
+    response.send("User registered successfully!").end();
 }
