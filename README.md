@@ -18,6 +18,9 @@ npm run seed-database
 
 # Change user password
 npm run change-password <username> <password>
+
+# Change user role
+npm run change-role <username> <role>
 ```
 
 ## Database schema

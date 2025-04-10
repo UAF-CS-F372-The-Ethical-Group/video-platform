@@ -10,7 +10,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "seed-database": "node src/scripts/seedDatabase.js",
-    "change-password": "node src/scripts/changePassword.js"
+    "change-password": "node src/scripts/changePassword.js",
+    "change-role": "node src/scripts/changeRole.js"
   },
   "dependencies": {
     "express": "^4.21.2",
