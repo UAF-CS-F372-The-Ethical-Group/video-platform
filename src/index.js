@@ -10,6 +10,7 @@ import * as path from "node:path";
 import { client as mongoClient } from "./mongodb.js";
 import { loginPost } from "./pages/login.js";
 import { playerHandler } from "./pages/player.js";
+import { registerPost } from "./pages/login.js";
 
 const app = express();
 app.use(session({
@@ -23,6 +24,7 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/login.html", loginPost);
+app.post("/register.html", registerPost);
 app.get("/gallery.html", renderGallery);
 
 app.get("/player.html", playerHandler);

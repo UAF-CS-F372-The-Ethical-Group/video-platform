@@ -11,7 +11,7 @@ export default function validatePassword(password) {
     const lowercaseRegex = /[a-z]/;
     const uppercaseRegex = /[A-Z]/;
     const numberRegex = /[0-9]/;
-    const specialRegex = /[!@#$%^&*()_+]/;
+    const specialRegex = /[!@#$%^&*()_+.]/;
 
     return (password.length === 8) && [
         lowercaseRegex,
