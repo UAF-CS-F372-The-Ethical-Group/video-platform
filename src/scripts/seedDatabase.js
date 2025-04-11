@@ -30,7 +30,7 @@ const createdMovieResponse = await movieCollection.insertMany([
     }, {
         title: "Waterfall",
         genre: "Water",
-        videoPath: "/data/246856_tiny_.mp4",
+        videoPath: "/data/246856_tiny.mp4",
         thumbnailPath: "/data/246856_tiny_thumb.png"
     },
 ]);
