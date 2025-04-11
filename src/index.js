@@ -8,8 +8,8 @@ import express from "express";
 import session from "express-session";
 import * as path from "node:path";
 import { client as mongoClient } from "./mongodb.js";
-import { renderGallery } from "./pages/gallery.js";
 import { loginPost } from "./pages/login.js";
+import { playerHandler } from "./pages/player.js";
 
 const app = express();
 app.use(session({
@@ -24,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post("/login.html", loginPost);
 app.get("/gallery.html", renderGallery);
+
+app.get("/player.html", playerHandler);
 
 app.get("/whoami", (request, response) => {
     response.send(request.session).end();
