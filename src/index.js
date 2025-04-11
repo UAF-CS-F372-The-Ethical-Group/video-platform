@@ -11,6 +11,7 @@ import { client as mongoClient } from "./mongodb.js";
 import { loginPost } from "./pages/login.js";
 import { playerHandler } from "./pages/player.js";
 import { registerPost } from "./pages/login.js";
+import { renderGallery } from "./pages/gallery.js";
 
 const app = express();
 app.use(session({
