@@ -43,7 +43,7 @@ export async function playerHandler(request: Request, response: Response) {
     return;
   }
   const actionValue = request.query.action;
-  if (actionValue !== null) {
+  if (actionValue != null) {
     await likeCollection.updateOne(
       {
         movieId: new ObjectId(movieId),

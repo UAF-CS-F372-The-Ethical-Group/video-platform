@@ -52,6 +52,6 @@ following properties:
 
 ```ts
 interface Session {
-    userId: string; // The ID of the currently authenticated user
+  userId: string; // The ID of the currently authenticated user
 }
 ```

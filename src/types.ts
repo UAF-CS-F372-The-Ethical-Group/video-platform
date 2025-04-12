@@ -1,11 +1,11 @@
 import { ObjectId } from "mongodb";
 
 export interface User {
-    _id: ObjectId
-    username: string
-    password: string
-    failedLoginAttempts?: number
-    role: string
+  _id: ObjectId;
+  username: string;
+  password: string;
+  failedLoginAttempts?: number;
+  role: string;
 }
 
 export interface Movie {

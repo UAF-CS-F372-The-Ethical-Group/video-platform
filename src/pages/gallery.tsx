@@ -6,6 +6,7 @@ import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
 import { join } from "node:path";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
+import Thumbnail from "../components/Thumbnail.tsx";
 
 /**
  * Fetch the favorite movies for the specified user
@@ -68,21 +69,6 @@ async function getMovies(filter: string): Promise<Movie[]> {
 }
 
 /**
- * Generates HTML markup for the given movie
- * @param {Movie} movie
- */
-function generateThumbnailHtml(movie: Movie) {
-  return (
-    <div className="movie">
-      <a href={`/player.html?movie=${movie._id}`}>
-        <img src={movie.thumbnailPath} alt={movie.title} />
-        <h3>{movie.title}</h3>
-      </a>
-    </div>
-  );
-}
-
-/**
  * Checks user authentication and then returns an HTML page with the
  * user's favorite movies, and a list of all movies. They are sorted
  * alphabetically, and filtered according to the `search` query
@@ -103,9 +89,9 @@ export async function renderGallery(request: Request, response: Response) {
   const searchString = request.query.search?.toString() ?? "";
 
   const favoriteMovies = await getFavorites(user._id, searchString);
-  const favoriteMoviesHtml = favoriteMovies.map(generateThumbnailHtml);
+  const favoriteMoviesHtml = favoriteMovies.map(Thumbnail);
   const allMovies = await getMovies(searchString);
-  const allMoviesHtml = allMovies.map(generateThumbnailHtml);
+  const allMoviesHtml = allMovies.map(Thumbnail);
 
   const templateHtml =
     (await readFile(join(import.meta.dirname!, "../static/gallery.html")))
