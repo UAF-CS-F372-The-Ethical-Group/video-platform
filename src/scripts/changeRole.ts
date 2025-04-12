@@ -3,7 +3,7 @@
  * the command line.
  */
 
-import { client, userCollection } from "../mongodb.js";
+import { client, userCollection } from "../mongodb.ts";
 
 if (process.argv.length !== 4) {
     console.error(
@@ -17,7 +17,7 @@ const username = process.argv[2];
 const role = process.argv[3];
 await userCollection.updateOne(
     { username },
-    { $set: {role: role } }
+    { $set: { role: role } }
 );
 const user = await userCollection.findOne({ username });
 console.log(user);
