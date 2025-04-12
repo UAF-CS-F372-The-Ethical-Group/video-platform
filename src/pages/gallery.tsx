@@ -1,5 +1,6 @@
 import { Document, ObjectId } from "mongodb";
 import { readFile } from "node:fs/promises";
+import { render } from "preact-render-to-string";
 
 import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
 import { join } from "node:path";
@@ -69,17 +70,16 @@ async function getMovies(filter: string): Promise<Movie[]> {
 /**
  * Generates HTML markup for the given movie
  * @param {Movie} movie
- * @returns
  */
 function generateThumbnailHtml(movie: Movie) {
-  return `
-        <div class="movie">
-            <a href="/player.html?movie=${movie._id}">
-                <img src="${movie.thumbnailPath}" alt="${movie.title}">
-                <h3>${movie.title}</h3>
-            </a>
-        </div> 
-    `;
+  return (
+    <div className="movie">
+      <a href={`/player.html?movie=${movie._id}`}>
+        <img src={movie.thumbnailPath} alt={movie.title} />
+        <h3>{movie.title}</h3>
+      </a>
+    </div>
+  );
 }
 
 /**
@@ -103,16 +103,25 @@ export async function renderGallery(request: Request, response: Response) {
   const searchString = request.query.search?.toString() ?? "";
 
   const favoriteMovies = await getFavorites(user._id, searchString);
-  const favoriteMoviesHtml = favoriteMovies.map(generateThumbnailHtml).join("");
+  const favoriteMoviesHtml = favoriteMovies.map(generateThumbnailHtml);
   const allMovies = await getMovies(searchString);
-  const allMoviesHtml = allMovies.map(generateThumbnailHtml).join("");
+  const allMoviesHtml = allMovies.map(generateThumbnailHtml);
 
   const templateHtml =
     (await readFile(join(import.meta.dirname!, "../static/gallery.html")))
       .toString();
   const renderedHtml = templateHtml
-    .replace("<!-- SLOT-GALLERY-SEARCH -->", searchString)
-    .replace("<!-- SLOT-GALLERY-FAVORITES -->", favoriteMoviesHtml)
-    .replace("<!-- SLOT-GALLERY-MOVIES -->", allMoviesHtml);
+    .replace(
+      "<!-- SLOT-GALLERY-SEARCH -->",
+      searchString,
+    )
+    .replace(
+      "<!-- SLOT-GALLERY-FAVORITES -->",
+      render(<>{favoriteMoviesHtml}</>),
+    )
+    .replace(
+      "<!-- SLOT-GALLERY-MOVIES -->",
+      render(<>{allMoviesHtml}</>),
+    );
   response.send(renderedHtml);
 }

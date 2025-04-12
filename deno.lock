@@ -3,10 +3,13 @@
   "specifiers": {
     "npm:@types/express-session@^1.18.1": "1.18.1",
     "npm:@types/express@^5.0.1": "5.0.1",
+    "npm:@types/node@*": "22.12.0",
     "npm:connect-mongo@^5.1.0": "5.1.0_express-session@1.18.1_mongodb@6.15.0",
     "npm:express-session@^1.18.1": "1.18.1",
     "npm:express@^5.1.0": "5.1.0",
-    "npm:mongodb@^6.15.0": "6.15.0"
+    "npm:mongodb@^6.15.0": "6.15.0",
+    "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.4",
+    "npm:preact@^10.26.4": "10.26.4"
   },
   "npm": {
     "@mongodb-js/saslprep@1.2.1": {
@@ -422,6 +425,15 @@
     "path-to-regexp@8.2.0": {
       "integrity": "sha512-TdrF7fW9Rphjq4RjrW0Kp2AW0Ahwu9sRGTkS6bvDi0SCwZlEZYmcfDbEsTz8RVk0EHIS/Vd1bv3JhG+1xZuAyQ=="
     },
+    "preact-render-to-string@6.5.13_preact@10.26.4": {
+      "integrity": "sha512-iGPd+hKPMFKsfpR2vL4kJ6ZPcFIoWZEcBf0Dpm3zOpdVvj77aY8RlLiQji5OMrngEyaxGogeakTb54uS2FvA6w==",
+      "dependencies": [
+        "preact"
+      ]
+    },
+    "preact@10.26.4": {
+      "integrity": "sha512-KJhO7LBFTjP71d83trW+Ilnjbo+ySsaAgCfXOXUlmGzJ4ygYPWmysm77yg4emwfmoz3b22yvH5IsVFHbhUaH5w=="
+    },
     "proxy-addr@2.0.7": {
       "integrity": "sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==",
       "dependencies": [
@@ -595,7 +607,9 @@
       "npm:connect-mongo@^5.1.0",
       "npm:express-session@^1.18.1",
       "npm:express@^5.1.0",
-      "npm:mongodb@^6.15.0"
+      "npm:mongodb@^6.15.0",
+      "npm:preact-render-to-string@^6.5.13",
+      "npm:preact@^10.26.4"
     ]
   }
 }

@@ -5,7 +5,9 @@
     "connect-mongo": "npm:connect-mongo@^5.1.0",
     "express": "npm:express@^5.1.0",
     "express-session": "npm:express-session@^1.18.1",
-    "mongodb": "npm:mongodb@^6.15.0"
+    "mongodb": "npm:mongodb@^6.15.0",
+    "preact": "npm:preact@^10.26.4",
+    "preact-render-to-string": "npm:preact-render-to-string@^6.5.13"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
