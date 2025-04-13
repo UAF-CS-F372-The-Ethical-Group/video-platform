@@ -6,19 +6,11 @@ import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import { render } from "preact-render-to-string";
 import LikeButtons, { LikeButtonAction } from "../components/LikeButtons.tsx";
+import { GenerateVideoHtml } from "../components/VideoPlayer.tsx";
 
-function generateVideoHtml(movie: Movie) {
-  return `<div _id="video_player">
-            <h1>${movie.title}<\h1>
-            <video controls="" autoplay="" width="250">
-                <source src="${movie.videoPath}" type="video/mp4">
-            </video>
-        </div>`;
-}
-
-function generateLikesHtml(movie: Movie, like?: Like) {
-  return render(LikeButtons({ movie, like }));
-}
+// function generateLikesHtml(movie: Movie, like?: Like) {
+//   return render(LikeButtons({ movie, like }));
+// }
 
 export async function playerHandler(request: Request, response: Response) {
   const user = await userCollection.findOne({
@@ -60,9 +52,12 @@ export async function playerHandler(request: Request, response: Response) {
     likeFilter,
   );
 
-  const videoHtml = generateVideoHtml(movie);
-
-  const likesHtml = generateLikesHtml(movie, userLike ?? undefined);
+  const renderedHtml = render(
+    <>
+      <GenerateVideoHtml movie={movie} />{" "}
+      <LikeButtons movie={movie} like={userLike ?? undefined} />
+    </>,
+  );
 
   const templatePlayerHtml = await readFile(join(
     import.meta.dirname!,
@@ -71,10 +66,9 @@ export async function playerHandler(request: Request, response: Response) {
 
   const playerRenderedHtml = templatePlayerHtml.toString().replace(
     "<!--Video Player Slot-->",
-    videoHtml,
-  ).replace(
-    "<!--Video Likes Slot-->",
-    likesHtml,
+    renderedHtml,
   );
+
   response.send(playerRenderedHtml).end();
+
 }
