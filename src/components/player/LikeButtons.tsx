@@ -1,4 +1,4 @@
-import { Like, Movie } from "../types.ts";
+import { Like, Movie } from "../../types.ts";
 
 export enum LikeButtonAction {
   LIKE = "like",

@@ -1,5 +1,5 @@
 import { Movie } from "../../types.ts";
-import Thumbnail from "../Thumbnail.tsx";
+import Thumbnail from "./Thumbnail.tsx";
 
 export default function GalleryPage(
   { favorites, movies, search }: {
