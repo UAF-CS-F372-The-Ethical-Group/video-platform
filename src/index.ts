@@ -9,7 +9,7 @@ import session from "express-session";
 import * as path from "node:path";
 import { client as mongoClient } from "./mongodb.ts";
 import { loginPost } from "./pages/login.ts";
-import { playerHandler } from "./pages/player.tsx";
+import { playerHandler } from "./pages/player.ts";
 import { registerPost } from "./pages/login.ts";
 import { renderGallery } from "./pages/gallery.tsx";
 import { AddressInfo } from "node:net";

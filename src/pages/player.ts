@@ -5,12 +5,8 @@ import { join } from "node:path";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import { render } from "preact-render-to-string";
-import LikeButtons, { LikeButtonAction } from "../components/LikeButtons.tsx";
-import { GenerateVideoHtml } from "../components/VideoPlayer.tsx";
-
-// function generateLikesHtml(movie: Movie, like?: Like) {
-//   return render(LikeButtons({ movie, like }));
-// }
+import { LikeButtonAction } from "../components/LikeButtons.tsx";
+import VideoPage from "../components/VideoPage.tsx";
 
 export async function playerHandler(request: Request, response: Response) {
   const user = await userCollection.findOne({
@@ -53,10 +49,7 @@ export async function playerHandler(request: Request, response: Response) {
   );
 
   const renderedHtml = render(
-    <>
-      <GenerateVideoHtml movie={movie} />{" "}
-      <LikeButtons movie={movie} like={userLike ?? undefined} />
-    </>,
+    VideoPage({ movie, like: userLike ?? undefined }),
   );
 
   const templatePlayerHtml = await readFile(join(
@@ -70,5 +63,4 @@ export async function playerHandler(request: Request, response: Response) {
   );
 
   response.send(playerRenderedHtml).end();
-
 }
