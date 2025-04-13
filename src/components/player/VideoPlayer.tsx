@@ -1,4 +1,4 @@
-import { Movie } from "../types.ts";
+import { Movie } from "../../types.ts";
 
 export default function VideoPlayer({ movie }: { movie: Movie }) {
   return (

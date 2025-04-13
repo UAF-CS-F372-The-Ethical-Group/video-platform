@@ -1,4 +1,4 @@
-import { Movie } from "../types.ts";
+import { Movie } from "../../types.ts";
 
 /**
  * Generates HTML markup for the given movie

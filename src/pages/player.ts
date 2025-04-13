@@ -5,8 +5,8 @@ import { join } from "node:path";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import { render } from "preact-render-to-string";
-import { LikeButtonAction } from "../components/LikeButtons.tsx";
-import VideoPage from "../components/VideoPage.tsx";
+import { LikeButtonAction } from "../components/player/LikeButtons.tsx";
+import VideoPage from "../components/player/VideoPage.tsx";
 
 export async function playerHandler(request: Request, response: Response) {
   const user = await userCollection.findOne({
