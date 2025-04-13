@@ -6,16 +6,15 @@
 import { client, userCollection } from "../mongodb.ts";
 import hashPassword from "../hashPassword.ts";
 
-if (process.argv.length !== 4) {
+if (Deno.args.length !== 2) {
   console.error(
     "Invalid arguments:\n" +
       "Usage: npm run change-password <username> <password>",
   );
-  process.exit(1);
+  Deno.exit(1);
 }
 
-const username = process.argv[2];
-const password = process.argv[3];
+const [username, password] = Deno.args;
 await userCollection.updateOne(
   { username },
   { $set: { password: hashPassword(password) } },

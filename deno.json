@@ -14,6 +14,8 @@
     "jsxImportSource": "preact"
   },
   "tasks": {
+    "change-password": "deno run -A src/scripts/changeRole.ts",
+    "change-role": "deno run -A src/scripts/changeRole.ts",
     "seed-database": "deno run -A src/scripts/seedDatabase.ts",
     "dev": "deno run --watch-hmr -A src/index.ts",
     "start": "deno run -A src/index.ts"
