@@ -12,7 +12,6 @@ import validatePassword from "../validatePassword.ts";
  * Checks user authentication and returns an HTML page
  * with the movie gallery on successful login. User account
  * is deleted after 3 failed login attempts otherwise.
- * @returns
  */
 export async function loginPost(request: Request, response: Response) {
   const { username, password } = request.body;
@@ -58,7 +57,6 @@ export async function loginPost(request: Request, response: Response) {
 /**
  * Processes registration of new user accounts and seeds the data
  * in the database.
- * @returns
  */
 export async function registerPost(request: Request, response: Response) {
   const { username, password, confirmPassword } = request.body;

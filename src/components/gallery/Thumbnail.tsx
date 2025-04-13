@@ -2,7 +2,6 @@ import { Movie } from "../../types.ts";
 
 /**
  * Generates HTML markup for the given movie
- * @param {Movie} movie
  */
 export default function Thumbnail({ movie }: { movie: Movie }) {
   return (

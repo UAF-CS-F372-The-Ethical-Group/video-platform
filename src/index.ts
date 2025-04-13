@@ -36,7 +36,6 @@ app.use(express.urlencoded({ extended: true }));
 app.post("/login.html", loginPost);
 app.post("/register.html", registerPost);
 app.get("/gallery.html", renderGallery);
-
 app.get("/player.html", playerHandler);
 
 app.get("/whoami", (request, response) => {
