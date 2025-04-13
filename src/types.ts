@@ -19,5 +19,6 @@ export interface Movie {
 export interface Like {
   userId: ObjectId;
   movieId: ObjectId;
+  status: boolean;
   _id: ObjectId;
 }

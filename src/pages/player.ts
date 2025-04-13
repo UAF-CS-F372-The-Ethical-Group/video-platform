@@ -1,9 +1,11 @@
 import { ObjectId } from "mongodb";
-import { likeCollection, movieCollection } from "../mongodb.ts";
+import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { Movie } from "../types.ts";
+import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
+import { render } from "preact-render-to-string";
+import LikeButtons, { LikeButtonAction } from "../components/LikeButtons.tsx";
 
 function generateVideoHtml(movie: Movie) {
   return `<div _id="video_player">
@@ -14,26 +16,19 @@ function generateVideoHtml(movie: Movie) {
         </div>`;
 }
 
-function generateLikesHtml(movie: Movie) {
-  return `<div>
-        <form>
-        <input type="hidden" name="movie" value="${movie._id}">
-        <input type="hidden" name="action" value="like">
-        <input type="submit" id="likeButton" value="Like">
-        </form>
-        <form>
-        <input type="hidden" name="movie" value="${movie._id}">
-        <input type="hidden" name="action" value="dislike">
-        <input type="submit" id="dislikeButton" value="Dislike">
-        </form>
-    </div>`;
+function generateLikesHtml(movie: Movie, like?: Like) {
+  return render(LikeButtons({ movie, like }));
 }
 
 export async function playerHandler(request: Request, response: Response) {
-  if (request.session.userId == null) {
+  const user = await userCollection.findOne({
+    _id: new ObjectId(request.session.userId),
+  });
+  if (user == null) {
     response.redirect("/login.html");
     return;
   }
+
   const movieId = request.query.movie?.toString();
   const movie = await movieCollection.findOne<Movie>(
     { _id: new ObjectId(movieId) },
@@ -42,25 +37,32 @@ export async function playerHandler(request: Request, response: Response) {
     response.redirect("/gallery.html");
     return;
   }
-  const actionValue = request.query.action;
+
+  const likeFilter = {
+    movieId: movie._id,
+    userId: user._id,
+  };
+
+  const actionValue = request.query.action as LikeButtonAction;
   if (actionValue != null) {
-    await likeCollection.updateOne(
-      {
-        movieId: new ObjectId(movieId),
-        userId: new ObjectId(request.session.userId),
-      },
-      { $set: { status: actionValue === "like" } },
-      { upsert: true },
-    );
+    if (actionValue === LikeButtonAction.REMOVE) {
+      await likeCollection.deleteOne(likeFilter);
+    } else {
+      await likeCollection.updateOne(
+        likeFilter,
+        { $set: { status: actionValue === LikeButtonAction.LIKE } },
+        { upsert: true },
+      );
+    }
   }
 
-  const likes = await likeCollection.findOne(
-    { movieId: new ObjectId(movieId) },
+  const userLike = await likeCollection.findOne<Like>(
+    likeFilter,
   );
 
   const videoHtml = generateVideoHtml(movie);
 
-  const likesHtml = generateLikesHtml(movie);
+  const likesHtml = generateLikesHtml(movie, userLike ?? undefined);
 
   const templatePlayerHtml = await readFile(join(
     import.meta.dirname!,
