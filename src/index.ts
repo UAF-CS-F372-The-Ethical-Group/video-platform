@@ -11,7 +11,7 @@ import { client as mongoClient } from "./mongodb.ts";
 import { loginPost } from "./pages/login.ts";
 import { playerHandler } from "./pages/player.ts";
 import { registerPost } from "./pages/login.ts";
-import { renderGallery } from "./pages/gallery.tsx";
+import { renderGallery } from "./pages/gallery.ts";
 import { AddressInfo } from "node:net";
 
 declare module "express-session" {

@@ -4,7 +4,7 @@ import { Movie } from "../types.ts";
  * Generates HTML markup for the given movie
  * @param {Movie} movie
  */
-export default function Thumbnail(movie: Movie) {
+export default function Thumbnail({ movie }: { movie: Movie }) {
   return (
     <div className="movie">
       <a href={`/player.html?movie=${movie._id}`}>

@@ -6,7 +6,7 @@ import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
 import { join } from "node:path";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
-import Thumbnail from "../components/Thumbnail.tsx";
+import GalleryPage from "../components/gallery/GalleryPage.tsx";
 
 /**
  * Fetch the favorite movies for the specified user
@@ -73,9 +73,6 @@ async function getMovies(filter: string): Promise<Movie[]> {
  * user's favorite movies, and a list of all movies. They are sorted
  * alphabetically, and filtered according to the `search` query
  * parameter.
- * @param {*} request
- * @param {*} response
- * @returns
  */
 export async function renderGallery(request: Request, response: Response) {
   const user = await userCollection.findOne({
@@ -89,25 +86,21 @@ export async function renderGallery(request: Request, response: Response) {
   const searchString = request.query.search?.toString() ?? "";
 
   const favoriteMovies = await getFavorites(user._id, searchString);
-  const favoriteMoviesHtml = favoriteMovies.map(Thumbnail);
   const allMovies = await getMovies(searchString);
-  const allMoviesHtml = allMovies.map(Thumbnail);
 
   const templateHtml =
     (await readFile(join(import.meta.dirname!, "../static/gallery.html")))
       .toString();
   const renderedHtml = templateHtml
     .replace(
-      "<!-- SLOT-GALLERY-SEARCH -->",
-      searchString,
-    )
-    .replace(
-      "<!-- SLOT-GALLERY-FAVORITES -->",
-      render(<>{favoriteMoviesHtml}</>),
-    )
-    .replace(
-      "<!-- SLOT-GALLERY-MOVIES -->",
-      render(<>{allMoviesHtml}</>),
+      "<!-- SLOT-GALLERY-PAGE -->",
+      render(
+        GalleryPage({
+          favorites: favoriteMovies,
+          movies: allMovies,
+          search: searchString,
+        }),
+      ),
     );
   response.send(renderedHtml);
 }
