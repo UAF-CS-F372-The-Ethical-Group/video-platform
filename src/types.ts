@@ -13,7 +13,6 @@ export interface Movie {
   genre: string;
   thumbnailPath: string;
   videoPath: string;
-  videoMimeType: string;
   _id: ObjectId;
 }
 
