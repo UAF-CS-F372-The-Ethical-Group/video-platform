@@ -18,6 +18,7 @@ deno task dev
 
 # To start the production server
 deno task start
+
 # Seed database
 deno task seed-database
 
@@ -26,6 +27,15 @@ deno task change-password <username> <password>
 
 # Change user role
 deno task change-role <username> <role>
+
+# Format all files
+deno fmt
+
+# Lint files
+deno lint src/**/*.{ts,tsx}
+
+# Type check all files
+deno check src/**/*.{ts,tsx}
 ```
 
 ## Database schema
