@@ -6,13 +6,13 @@
 import MongoStore from "connect-mongo";
 import express from "express";
 import session from "express-session";
+import { AddressInfo } from "node:net";
 import * as path from "node:path";
 import { client as mongoClient } from "./mongodb.ts";
-import { loginPost } from "./pages/login.ts";
-import { playerHandler } from "./pages/player.ts";
-import { registerPost } from "./pages/login.ts";
 import { renderGallery } from "./pages/gallery.ts";
-import { AddressInfo } from "node:net";
+import { loginGet, loginPost } from "./pages/login.ts";
+import { registerGet, registerPost } from "./pages/register.ts";
+import { playerHandler } from "./pages/player.ts";
 
 declare module "express-session" {
   interface SessionData {
@@ -33,7 +33,11 @@ app.use(session({
 }));
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (_, response) => response.redirect("/gallery.html"));
+
+app.get("/login.html", loginGet);
 app.post("/login.html", loginPost);
+app.get("/register.html", registerGet);
 app.post("/register.html", registerPost);
 app.get("/gallery.html", renderGallery);
 app.get("/player.html", playerHandler);

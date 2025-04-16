@@ -1,12 +1,11 @@
 import { Document, ObjectId } from "mongodb";
-import { readFile } from "node:fs/promises";
-import { render } from "preact-render-to-string";
 
 import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
 import { join } from "node:path";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import GalleryPage from "../components/gallery/GalleryPage.tsx";
+import { renderPage } from "../htmlRenderer.ts";
 
 /**
  * Fetch the favorite movies for the specified user
@@ -88,19 +87,11 @@ export async function renderGallery(request: Request, response: Response) {
   const favoriteMovies = await getFavorites(user._id, searchString);
   const allMovies = await getMovies(searchString);
 
-  const templateHtml =
-    (await readFile(join(import.meta.dirname!, "../static/gallery.html")))
-      .toString();
-  const renderedHtml = templateHtml
-    .replace(
-      "<!-- SLOT-GALLERY-PAGE -->",
-      render(
-        GalleryPage({
-          favorites: favoriteMovies,
-          movies: allMovies,
-          search: searchString,
-        }),
-      ),
-    );
-  response.send(renderedHtml);
+  response.send(renderPage(
+    GalleryPage({
+      favorites: favoriteMovies,
+      movies: allMovies,
+      search: searchString,
+    }),
+  ));
 }
