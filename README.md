@@ -6,21 +6,36 @@ Documentation is contained in the [docs](./docs) directory.
 
 ## Development
 
+This project uses Deno. Follow the instructions at
+https://docs.deno.com/runtime/#install-deno to install it for your platform.
+
 ```bash
+# Install dependencies
+deno install
+
 # To start the dev server
-npm run dev
+deno task dev
 
 # To start the production server
-npm start
+deno task start
 
 # Seed database
-npm run seed-database
+deno task seed-database
 
 # Change user password
-npm run change-password <username> <password>
+deno task change-password <username> <password>
 
 # Change user role
-npm run change-role <username> <role>
+deno task change-role <username> <role>
+
+# Format all files
+deno fmt
+
+# Lint files
+deno lint src/**/*.{ts,tsx}
+
+# Type check all files
+deno check src/**/*.{ts,tsx}
 ```
 
 ## Database schema
@@ -52,6 +67,6 @@ following properties:
 
 ```ts
 interface Session {
-    userId: string; // The ID of the currently authenticated user
+  userId: string; // The ID of the currently authenticated user
 }
 ```
