@@ -1,7 +1,6 @@
 import { Document, ObjectId } from "mongodb";
 
 import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
-import { join } from "node:path";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import GalleryPage from "../components/gallery/GalleryPage.tsx";

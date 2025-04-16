@@ -1,10 +1,7 @@
 import { ObjectId } from "mongodb";
 import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
-import { render } from "preact-render-to-string";
 import { LikeButtonAction } from "../components/player/LikeButtons.tsx";
 import VideoPage from "../components/player/VideoPage.tsx";
 import { renderPage } from "../htmlRenderer.ts";
