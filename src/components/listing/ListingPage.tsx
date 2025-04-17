@@ -45,6 +45,11 @@ function ListingRow(
             hidden={currentRole !== UserRole.MARKETING}
           />
         </form>
+        {currentRole !== UserRole.EDITOR
+          ? null
+          : <form id="edit-button" action={`/edit/${movie._id}`} method="GET">
+              <input id="submit" type="submit" value="Edit" />
+            </form>}
       </td>
     </tr>
   );
@@ -63,6 +68,11 @@ export default function Listing(
         <title>Movie Listing</title>
       </Head>
       <h1>Movie Listing</h1>
+      {currentRole !== UserRole.EDITOR
+        ? null
+        : <form id="upload-button" action="/upload.html" method="GET" >
+            <input id="submit" type="submit" value="Upload New Video" />
+          </form>}
       <table>
         <thead>
           <tr>
