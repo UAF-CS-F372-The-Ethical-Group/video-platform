@@ -1,4 +1,5 @@
 import { Movie } from "../../types.ts";
+import Head from "../Head.tsx";
 import Thumbnail from "./Thumbnail.tsx";
 
 export default function GalleryPage(
@@ -10,6 +11,9 @@ export default function GalleryPage(
 ) {
   return (
     <>
+      <Head>
+        <title>Gallery</title>
+      </Head>
       <h1 id="gallery-header">Gallery</h1>
       <form method="get">
         <fieldset id="search-form">
