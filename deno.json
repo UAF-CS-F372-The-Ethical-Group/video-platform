@@ -18,7 +18,8 @@
     "change-role": "deno run -A src/scripts/changeRole.ts",
     "seed-database": "deno run -A src/scripts/seedDatabase.ts",
     "dev": "deno run --watch-hmr -A src/index.ts",
-    "start": "deno run -A src/index.ts"
+    "start": "deno run -A src/index.ts",
+    "start-docker": "deno task seed-database --no-reseed && deno task start" 
   },
   "vendor": true
 }

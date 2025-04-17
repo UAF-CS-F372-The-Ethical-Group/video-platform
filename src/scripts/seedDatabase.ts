@@ -6,6 +6,15 @@ import hashPassword from "../hashPassword.ts";
 import { client, db, likeCollection, movieCollection } from "../mongodb.ts";
 import { Like, Movie } from "../types.ts";
 
+if (Deno.args.includes("--no-reseed")) {
+  const collections = await db.collections();
+  if (collections.length > 0) {
+    console.log("Collections exist, not reseeding database.");
+    await client.close();
+    Deno.exit();
+  }
+}
+
 await db.dropCollection("users");
 await db.dropCollection("movies");
 await db.dropCollection("likes");
@@ -59,3 +68,4 @@ await (likeCollection as unknown as Collection<Omit<Like, "_id">>).insertMany(
 );
 
 await client.close();
+console.log("Successfully seeded database.")
