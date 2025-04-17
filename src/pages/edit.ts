@@ -1,3 +1,7 @@
+/**
+ *  Contains logic for the video edit page including updating
+ *  movie metadata in the database and deleting movies.
+ */
 import { Request, Response } from "express";
 import { movieCollection, userCollection } from "../mongodb.ts";
 import { renderPage } from "../htmlRenderer.ts";
@@ -5,6 +9,9 @@ import { ObjectId } from "mongodb";
 import { Movie, User, UserRole } from "../types.ts";
 import EditPage from "../components/listing/EditPage.tsx";
 
+/**
+ *  Render edit page after a permissions check
+ */
 export async function editGet(request: Request, response: Response) {
   const user = await userCollection.findOne<User>({
     _id: new ObjectId(request.session.userId),
@@ -30,6 +37,9 @@ export async function editGet(request: Request, response: Response) {
   response.send(renderPage(EditPage({ movie })));
 }
 
+/**
+ * Handle edits and deletion of movie metadata with a POST request.
+ */
 export async function editPost(request: Request, response: Response) {
   const user = await userCollection.findOne<User>({
     _id: new ObjectId(request.session.userId),

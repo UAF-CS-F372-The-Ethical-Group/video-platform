@@ -23,7 +23,10 @@ export function loginGet(_request: Request, response: Response) {
  * with the movie gallery on successful login. User account
  * is deleted after 3 failed login attempts otherwise.
  */
-export async function loginPost(request: Request, response: Response) {
+export async function loginPost(
+  request: Request,
+  response: Response,
+) {
   const { username, password } = request.body;
 
   const user = await userCollection.findOne<User>({ username });

@@ -1,6 +1,14 @@
+/**
+ * Contains logic for data-fetching and handling of gallery functions.
+ */
+
 import { Document, ObjectId } from "mongodb";
 
-import { getMovies, likeCollection, userCollection } from "../mongodb.ts";
+import {
+  getMovies,
+  likeCollection,
+  userCollection,
+} from "../mongodb.ts";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import GalleryPage from "../components/gallery/GalleryPage.tsx";
@@ -53,7 +61,10 @@ async function getFavorites(
  * alphabetically, and filtered according to the `search` query
  * parameter.
  */
-export async function renderGallery(request: Request, response: Response) {
+export async function renderGallery(
+  request: Request,
+  response: Response,
+) {
   const user = await userCollection.findOne({
     _id: new ObjectId(request.session.userId),
   });

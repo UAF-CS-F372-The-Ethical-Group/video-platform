@@ -21,5 +21,8 @@
     "start": "deno run -A src/index.ts",
     "start-docker": "deno task seed-database --no-reseed && deno task start"
   },
-  "vendor": true
+  "vendor": true,
+  "fmt": {
+    "lineWidth": 70
+  }
 }

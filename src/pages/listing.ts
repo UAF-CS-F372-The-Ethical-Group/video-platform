@@ -1,5 +1,12 @@
+/**
+ * Contains logic for the backoffice listing pages, such as commenting
+ * on movies and viewing like counts.
+ */
+
 import { Request, Response } from "express";
-import Listing, { LikeMap } from "../components/listing/ListingPage.tsx";
+import Listing, {
+  LikeMap,
+} from "../components/listing/ListingPage.tsx";
 import { renderPage } from "../htmlRenderer.ts";
 import {
   getMovies,
@@ -10,11 +17,20 @@ import {
 import { ObjectId } from "mongodb";
 import { User, UserRole } from "../types.ts";
 
-export async function getListing(request: Request, response: Response) {
+/**
+ * Render the listing with all movies after a permissions check.
+ */
+export async function getListing(
+  request: Request,
+  response: Response,
+) {
   const user = await userCollection.findOne<User>({
     _id: new ObjectId(request.session.userId),
   });
-  if (user == null || ![UserRole.MARKETING, UserRole.EDITOR].includes(user?.role!)) {
+  if (
+    user == null ||
+    ![UserRole.MARKETING, UserRole.EDITOR].includes(user?.role!)
+  ) {
     response.status(403);
     response.send("Unauthorized");
     response.redirect("/login.html");
@@ -66,7 +82,13 @@ export async function getListing(request: Request, response: Response) {
   );
 }
 
-export async function listingPost(request: Request, response: Response) {
+/**
+ * Handle POSTs to the listing page, and check permissions accordingly
+ */
+export async function listingPost(
+  request: Request,
+  response: Response,
+) {
   const user = await userCollection.findOne<User>({
     _id: new ObjectId(request.session.userId),
   });
@@ -77,7 +99,10 @@ export async function listingPost(request: Request, response: Response) {
     return;
   }
 
-  const { movie: movieId, comment } = request.body as Record<string, string>;
+  const { movie: movieId, comment } = request.body as Record<
+    string,
+    string
+  >;
   movieCollection.updateOne({
     _id: new ObjectId(movieId),
   }, { $set: { comment } });

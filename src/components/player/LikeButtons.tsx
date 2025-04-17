@@ -1,3 +1,7 @@
+/**
+ * Contains definitions for the like button component
+ */
+
 import { Like, Movie } from "../../types.ts";
 
 export enum LikeButtonAction {
@@ -5,6 +9,15 @@ export enum LikeButtonAction {
   DISLIKE = "dislike",
   REMOVE = "remove",
 }
+
+/**
+ * 
+ * Generates html with data for the like button injected into it.
+ * 
+ * @param movie
+ * @param Like 
+ * @returns 
+ */
 
 export default function LikeButtons(
   { movie, like }: { movie: Movie; like?: Like },
@@ -17,7 +30,9 @@ export default function LikeButtons(
         <input
           type="hidden"
           name="action"
-          value={like?.status ? LikeButtonAction.REMOVE : LikeButtonAction.LIKE}
+          value={like?.status
+            ? LikeButtonAction.REMOVE
+            : LikeButtonAction.LIKE}
         />
         <input
           type="submit"

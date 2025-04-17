@@ -1,3 +1,7 @@
+/**
+ * Implements logic for user registration
+ */
+
 import { Request, Response } from "express";
 import hashPassword from "../hashPassword.ts";
 import { userCollection } from "../mongodb.ts";
@@ -6,7 +10,7 @@ import RegisterPage from "../components/RegisterPage.tsx";
 import { renderPage } from "../htmlRenderer.ts";
 
 /**
- * Renders the initial login page
+ * Renders the initial registration page
  */
 export function registerGet(_request: Request, response: Response) {
   response.setHeader("content-type", "text/html");
@@ -17,7 +21,10 @@ export function registerGet(_request: Request, response: Response) {
  * Processes registration of new user accounts and seeds the data
  * in the database.
  */
-export async function registerPost(request: Request, response: Response) {
+export async function registerPost(
+  request: Request,
+  response: Response,
+) {
   const { username, password, confirmPassword } = request.body;
 
   const user = await userCollection.findOne({ username });

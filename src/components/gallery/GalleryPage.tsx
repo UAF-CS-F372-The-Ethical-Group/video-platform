@@ -1,7 +1,13 @@
+/**
+ * Define components and markup for the gallery page
+ */
 import { Movie } from "../../types.ts";
 import Head from "../Head.tsx";
 import Thumbnail from "./Thumbnail.tsx";
 
+/**
+ * Generates the base layout for the gallery page.
+ */
 export default function GalleryPage(
   { favorites, movies, search }: {
     favorites: Movie[];

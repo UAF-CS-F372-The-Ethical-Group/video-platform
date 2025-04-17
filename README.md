@@ -6,10 +6,11 @@ Documentation is contained in the [docs](./docs) directory.
 
 ## Running
 
-To easily run the application without installing any development dependencies,
-use the `docker-compose.yaml` and `Dockerfile` in this repository. The
-`docker-compose.yaml` will start a mongodb server alongside the application
-server and automatically populate it with information.
+To easily run the application without installing any development
+dependencies, use the `docker-compose.yaml` and `Dockerfile` in this
+repository. The `docker-compose.yaml` will start a mongodb server
+alongside the application server and automatically populate it with
+information.
 
 ```bash
 # Clone the project repository
@@ -22,11 +23,12 @@ cd video-platform
 docker compose up
 ```
 
-Once the application has been started with `docker compose up`, it can be
-accessed at http://localhost:3000/.
+Once the application has been started with `docker compose up`, it can
+be accessed at http://localhost:3000/.
 
-This method of running the application automatically creates several users, and
-populates the database with several movies. The users are as follows:
+This method of running the application automatically creates several
+users, and populates the database with several movies. The users are
+as follows:
 
 | Username              | Password   | Role      |
 | :-------------------- | :--------- | :-------- |
@@ -38,10 +40,10 @@ populates the database with several movies. The users are as follows:
 ## Development
 
 This project uses Deno. Follow the instructions at
-https://docs.deno.com/runtime/#install-deno to install it for your platform.
-This project also assumes that you have mongodb running on localhost. The
-`MONGODB_URI` environment variable can be used to configure where the
-application tries to connect to mongodb.
+https://docs.deno.com/runtime/#install-deno to install it for your
+platform. This project also assumes that you have mongodb running on
+localhost. The `MONGODB_URI` environment variable can be used to
+configure where the application tries to connect to mongodb.
 
 ```bash
 # Install dependencies
@@ -96,8 +98,8 @@ deno check src/**/*.{ts,tsx}
 
 ## Session data schema
 
-The user session, available on `request.session` inside a route handler, has the
-following properties:
+The user session, available on `request.session` inside a route
+handler, has the following properties:
 
 ```ts
 interface Session {
