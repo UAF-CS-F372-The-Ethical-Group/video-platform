@@ -22,10 +22,10 @@ function ListingRow(
         <img src={movie.thumbnailPath} alt={movie.title} width="300" />
       </td>
       <td>
-        <h3>Title: {movie.title}</h3>
+        <h3> <a href={`/player.html/?movie=${movie._id}`}>Title: {movie.title}</a></h3>
         {currentRole !== UserRole.MARKETING
           ? null
-          : <div>Likes: {likes.likes} Dislikes: {likes.dislikes}</div>}
+          : <><div>Likes: {likes.likes}</div><div>Dislikes: {likes.dislikes}</div></>}
         <form method="POST">
           <input type="hidden" name="movie" value={movie._id.toString()} />
           <label for={"comment_" + movie._id}>Comment:</label>
