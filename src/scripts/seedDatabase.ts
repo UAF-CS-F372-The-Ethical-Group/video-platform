@@ -68,4 +68,4 @@ await (likeCollection as unknown as Collection<Omit<Like, "_id">>).insertMany(
 );
 
 await client.close();
-console.log("Successfully seeded database.")
+console.log("Successfully seeded database.");
