@@ -1,10 +1,27 @@
 import { Request, Response } from "express";
 import Listing, { LikeMap } from "../components/listing/ListingPage.tsx";
 import { renderPage } from "../htmlRenderer.ts";
-import { getMovies, likeCollection, movieCollection } from "../mongodb.ts";
+import {
+  getMovies,
+  likeCollection,
+  movieCollection,
+  userCollection,
+} from "../mongodb.ts";
 import { ObjectId } from "mongodb";
+import { User, UserRole } from "../types.ts";
 
-export async function getListing(_request: Request, response: Response) {
+export async function getListing(request: Request, response: Response) {
+  const user = await userCollection.findOne<User>({
+    _id: new ObjectId(request.session.userId),
+  });
+  if (user == null || ![UserRole.MARKETING, UserRole.EDITOR].includes(user?.role!)) {
+    response.status(403);
+    response.send("Unauthorized");
+    response.redirect("/login.html");
+    return;
+  }
+
+
   const movies = await getMovies();
 
   const groupedLikesCursor = likeCollection.aggregate<
@@ -44,11 +61,21 @@ export async function getListing(_request: Request, response: Response) {
     return map;
   }, new Map() as LikeMap);
 
-  response.setHeader("content-type", "text/html")
-  response.send(renderPage(Listing({ movies, likeMap })));
+  response.setHeader("content-type", "text/html");
+  response.send(renderPage(Listing({ movies, likeMap, currentRole: user.role })));
 }
 
-export function listingPost(request: Request, response: Response) {
+export async function listingPost(request: Request, response: Response) {
+  const user = await userCollection.findOne<User>({
+    _id: new ObjectId(request.session.userId),
+  });
+  if (user?.role != UserRole.MARKETING) {
+    response.status(403);
+    response.send("Unauthorized");
+    response.redirect("/login.html");
+    return;
+  }
+
   const { movie: movieId, comment } = request.body as Record<string, string>;
   movieCollection.updateOne({
     _id: new ObjectId(movieId),

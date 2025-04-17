@@ -1,11 +1,17 @@
 import { ObjectId } from "mongodb";
 
+export enum UserRole {
+  VIEWER = "viewer",
+  MARKETING = "marketing",
+  EDITOR = "editor",
+}
+
 export interface User {
   _id: ObjectId;
   username: string;
   password: string;
   failedLoginAttempts?: number;
-  role: string;
+  role: UserRole;
 }
 
 export interface Movie {

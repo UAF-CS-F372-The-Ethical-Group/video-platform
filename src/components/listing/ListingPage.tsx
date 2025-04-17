@@ -1,14 +1,20 @@
-import { Movie } from "../../types.ts";
+import { Movie, UserRole } from "../../types.ts";
 
 export interface LikeCounts {
-  likes: number
-  dislikes: number
+  likes: number;
+  dislikes: number;
 }
 
-export type LikeMap = Map<string, LikeCounts>
+export type LikeMap = Map<string, LikeCounts>;
 
-function ListingRow({ movie, likes }: { movie: Movie, likes?: LikeCounts }) {
-  likes ??= { likes: 0, dislikes: 0}
+function ListingRow(
+  { movie, likes, currentRole }: {
+    movie: Movie;
+    likes?: LikeCounts;
+    currentRole: UserRole;
+  },
+) {
+  likes ??= { likes: 0, dislikes: 0 };
   return (
     <tr>
       <td>
@@ -16,7 +22,9 @@ function ListingRow({ movie, likes }: { movie: Movie, likes?: LikeCounts }) {
       </td>
       <td>
         <h3>Title: {movie.title}</h3>
-        <div>Likes: {likes.likes} Dislikes: {likes.dislikes}</div>
+        {currentRole !== UserRole.MARKETING
+          ? null
+          : <div>Likes: {likes.likes} Dislikes: {likes.dislikes}</div>}
         <form method="POST">
           <input type="hidden" name="movie" value={movie._id.toString()} />
           <label for={"comment_" + movie._id}>Comment:</label>
@@ -25,18 +33,29 @@ function ListingRow({ movie, likes }: { movie: Movie, likes?: LikeCounts }) {
             id={"comment_" + movie._id}
             placeholder="No comment has been provided."
             autocomplete="off"
+            disabled={currentRole !== UserRole.MARKETING}
           >
             {movie.comment}
           </textarea>
-          <input type="submit" id="commentSubmit" value="Submit comment" />
+          <input
+            type="submit"
+            id="commentSubmit"
+            value="submit"
+            hidden={currentRole !== UserRole.MARKETING}
+          />
         </form>
       </td>
     </tr>
   );
 }
 
-export default function Listing({ movies, likeMap }: { movies: Movie[], likeMap: LikeMap  }) {
-  console.log(likeMap)
+export default function Listing(
+  { movies, likeMap, currentRole }: {
+    movies: Movie[];
+    likeMap: LikeMap;
+    currentRole: UserRole;
+  },
+) {
   return (
     <>
       <h1>Yippie!</h1>
@@ -48,7 +67,14 @@ export default function Listing({ movies, likeMap }: { movies: Movie[], likeMap:
           </tr>
         </thead>
         <tbody>
-          {movies.map((m) => <ListingRow key={m._id} movie={m} likes={likeMap.get(m._id.toString())} />)}
+          {movies.map((m) => (
+            <ListingRow
+              key={m._id}
+              movie={m}
+              likes={likeMap.get(m._id.toString())}
+              currentRole={currentRole}
+            />
+          ))}
         </tbody>
       </table>
     </>

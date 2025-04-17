@@ -5,7 +5,6 @@
 
 import { client, userCollection } from "../mongodb.ts";
 
-console.log(Deno.args);
 if (Deno.args.length !== 2) {
   console.error(
     "Invalid arguments:\n" +
