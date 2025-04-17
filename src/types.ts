@@ -14,7 +14,7 @@ export interface Movie {
   thumbnailPath: string;
   videoPath: string;
   videoMimeType: string;
-  comment: string;
+  comment?: string;
   _id: ObjectId;
 }
 

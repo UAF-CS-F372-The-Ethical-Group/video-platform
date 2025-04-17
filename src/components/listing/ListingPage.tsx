@@ -1,6 +1,14 @@
 import { Movie } from "../../types.ts";
 
-function ListingRow({ movie }: { movie: Movie }) {
+export interface LikeCounts {
+  likes: number
+  dislikes: number
+}
+
+export type LikeMap = Map<string, LikeCounts>
+
+function ListingRow({ movie, likes }: { movie: Movie, likes?: LikeCounts }) {
+  likes ??= { likes: 0, dislikes: 0}
   return (
     <tr>
       <td>
@@ -8,6 +16,7 @@ function ListingRow({ movie }: { movie: Movie }) {
       </td>
       <td>
         <h3>Title: {movie.title}</h3>
+        <div>Likes: {likes.likes} Dislikes: {likes.dislikes}</div>
         <form method="POST">
           <input type="hidden" name="movie" value={movie._id.toString()} />
           <label for={"comment_" + movie._id}>Comment:</label>
@@ -26,7 +35,8 @@ function ListingRow({ movie }: { movie: Movie }) {
   );
 }
 
-export default function Listing({ movies }: { movies: Movie[] }) {
+export default function Listing({ movies, likeMap }: { movies: Movie[], likeMap: LikeMap  }) {
+  console.log(likeMap)
   return (
     <>
       <h1>Yippie!</h1>
@@ -38,7 +48,7 @@ export default function Listing({ movies }: { movies: Movie[] }) {
           </tr>
         </thead>
         <tbody>
-          {movies.map((m) => <ListingRow key={m._id} movie={m} />)}
+          {movies.map((m) => <ListingRow key={m._id} movie={m} likes={likeMap.get(m._id.toString())} />)}
         </tbody>
       </table>
     </>

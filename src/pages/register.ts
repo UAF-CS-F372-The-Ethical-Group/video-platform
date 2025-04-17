@@ -9,6 +9,7 @@ import { renderPage } from "../htmlRenderer.ts";
  * Renders the initial login page
  */
 export function registerGet(_request: Request, response: Response) {
+  response.setHeader("content-type", "text/html")
   response.send(renderPage(RegisterPage()));
 }
 

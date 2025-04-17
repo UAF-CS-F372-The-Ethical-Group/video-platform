@@ -46,6 +46,7 @@ app.get("/listing.html", getListing);
 app.post("/listing.html", listingPost);
 
 app.get("/whoami", (request, response) => {
+  response.setHeader("content-type", "application/json")
   response.send(request.session).end();
 });
 
