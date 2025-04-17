@@ -1,6 +1,6 @@
 import { Document, ObjectId } from "mongodb";
 
-import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
+import { getMovies, likeCollection, userCollection } from "../mongodb.ts";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import GalleryPage from "../components/gallery/GalleryPage.tsx";
@@ -45,25 +45,6 @@ async function getFavorites(
   >(pipeline);
   const movieLikes = await movieLikesCursor.toArray();
   return movieLikes.map((like) => like.movieDocument).flat();
-}
-
-/**
- * Fetch all movies, sorted alphabetically
- */
-async function getMovies(filter: string): Promise<Movie[]> {
-  const pipeline: Document[] = [{ $sort: { title: 1 } }];
-  if (filter) {
-    pipeline.unshift({
-      $match: {
-        title: {
-          $regex: filter,
-          $options: "i",
-        },
-      },
-    });
-  }
-  const cursor = await movieCollection.aggregate<Movie>(pipeline);
-  return await cursor.toArray();
 }
 
 /**

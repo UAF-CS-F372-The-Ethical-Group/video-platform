@@ -38,24 +38,32 @@ button, input[type="button"], input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"], textarea {
   border: 1px solid #ced4da;
   display: block;
 }
 
-input {
+input, textarea {
   padding: 6px 12px;
   font-size: inherit;
 }
 
-button, input {
+button, input, textarea {
   outline: none;
   transition: box-shadow ease-in-out 0.1s;
   box-shadow: 0 0 0 0rem rgba(38, 143, 255, 0.5);
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  }
 }
 
-button:focus, input:focus {
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+table td {
+  vertical-align: top;
+
+  :first-child {
+    margin-top: 0;
+  }
 }
 
 /* Gallery styles */
