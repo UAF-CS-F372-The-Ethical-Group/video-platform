@@ -4,10 +4,44 @@
 
 Documentation is contained in the [docs](./docs) directory.
 
+## Running
+
+To easily run the application without installing any development dependencies,
+use the `docker-compose.yaml` and `Dockerfile` in this repository. The
+`docker-compose.yaml` will start a mongodb server alongside the application
+server and automatically populate it with information.
+
+```bash
+# Clone the project repository
+git clone https://github.com/UAF-CS-F372-The-Ethical-Group/video-platform.git
+
+# Open project directory
+cd video-platform
+
+# Start the server using docker compose
+docker compose up
+```
+
+Once the application has been started with `docker compose up`, it can be
+accessed at http://localhost:3000/.
+
+This method of running the application automatically creates several users, and
+populates the database with several movies. The users are as follows:
+
+| Username              | Password   | Role      |
+| :-------------------- | :--------- | :-------- |
+| email@example.com     | `ABCabc1!` | viewer    |
+| viewer@example.com    | `ABCabc1!` | viewer    |
+| marketing@example.com | `ABCabc1!` | marketing |
+| editor@example.com    | `ABCabc1!` | editor    |
+
 ## Development
 
 This project uses Deno. Follow the instructions at
 https://docs.deno.com/runtime/#install-deno to install it for your platform.
+This project also assumes that you have mongodb running on localhost. The
+`MONGODB_URI` environment variable can be used to configure where the
+application tries to connect to mongodb.
 
 ```bash
 # Install dependencies

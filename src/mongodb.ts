@@ -6,7 +6,7 @@
 import { Document, MongoClient } from "mongodb";
 import { Movie } from "./types.ts";
 
-export const client = new MongoClient("mongodb://localhost:27017");
+export const client = new MongoClient(Deno.env.get("MONGODB_URI") ?? "mongodb://localhost:27017");
 export const db = client.db("video-platform");
 export const userCollection = db.collection("users");
 export const movieCollection = db.collection("movies");

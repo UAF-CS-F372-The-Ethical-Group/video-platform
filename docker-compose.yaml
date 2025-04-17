@@ -1,0 +1,13 @@
+services:
+  video-platform:
+    build: .
+    environment:
+      MONGODB_URI: "mongodb://mongodb:27017"
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+    restart: no
+
+  mongodb:
+    image: mongo:8
