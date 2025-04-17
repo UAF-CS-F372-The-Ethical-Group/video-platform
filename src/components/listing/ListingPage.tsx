@@ -1,4 +1,5 @@
 import { Movie, UserRole } from "../../types.ts";
+import Head from "../Head.tsx";
 
 export interface LikeCounts {
   likes: number;
@@ -58,7 +59,10 @@ export default function Listing(
 ) {
   return (
     <>
-      <h1>Yippie!</h1>
+      <Head>
+        <title>Movie Listing</title>
+      </Head>
+      <h1>Movie Listing</h1>
       <table>
         <thead>
           <tr>

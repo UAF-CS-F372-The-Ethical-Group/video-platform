@@ -8,6 +8,7 @@ import hashPassword from "../hashPassword.ts";
 import { userCollection } from "../mongodb.ts";
 import { renderPage } from "../htmlRenderer.ts";
 import LoginPage from "../components/LoginPage.tsx";
+import { User, UserRole } from "../types.ts";
 
 /**
  * Renders the initial login page
@@ -25,7 +26,7 @@ export function loginGet(_request: Request, response: Response) {
 export async function loginPost(request: Request, response: Response) {
   const { username, password } = request.body;
 
-  const user = await userCollection.findOne({ username });
+  const user = await userCollection.findOne<User>({ username });
   if (user === null) {
     response.status(401).send("User does not exist.").end();
     return;
@@ -59,6 +60,11 @@ export async function loginPost(request: Request, response: Response) {
   // Update the user session to show that the user is logged in
   request.session.userId = user._id.toString();
 
-  // On successful login, redirect to the gallery
-  response.redirect(302, "/gallery.html"); // Temporary redirect
+  // On successful login, redirect the user to the correct landing
+  // page
+  if (user.role === UserRole.VIEWER) {
+    response.redirect("/gallery.html");
+  } else {
+    response.redirect("/listing.html");
+  }
 }
