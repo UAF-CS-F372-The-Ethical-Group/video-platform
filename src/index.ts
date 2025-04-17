@@ -32,7 +32,10 @@ app.use(session({
   saveUninitialized: true,
   // TODO: we need a better secret i guess.
   secret: "weh",
-  store: new MongoStore({ client: mongoClient, dbName: "video-platform" }),
+  store: new MongoStore({
+    client: mongoClient,
+    dbName: "video-platform",
+  }),
 }));
 app.use(express.urlencoded({ extended: true }));
 

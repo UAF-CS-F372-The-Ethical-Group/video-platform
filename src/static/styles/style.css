@@ -38,7 +38,10 @@ button, input[type="button"], input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="text"], input[type="email"], input[type="password"], textarea {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
   border: 1px solid #ced4da;
   display: block;
 }
@@ -67,7 +70,7 @@ table {
     border: none;
     border-top: 1px solid black;
     padding: 6px 6px;
-  
+
     :first-child {
       margin-top: 0;
     }

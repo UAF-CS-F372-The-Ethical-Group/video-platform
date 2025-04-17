@@ -3,7 +3,12 @@
  */
 import { Collection } from "mongodb";
 import hashPassword from "../hashPassword.ts";
-import { client, db, likeCollection, movieCollection } from "../mongodb.ts";
+import {
+  client,
+  db,
+  likeCollection,
+  movieCollection,
+} from "../mongodb.ts";
 import { Like, Movie } from "../types.ts";
 
 if (Deno.args.includes("--no-reseed")) {
@@ -61,20 +66,24 @@ const createdMovieResponse =
       },
     ]);
 
-const createdMovieIds = Object.values(createdMovieResponse.insertedIds);
-// Take half of the created movies, like some, and dislike others
-const likes = createdMovieIds.slice(0, createdMovieIds.length / 2 + 1).map((
-  movieId,
-  idx,
-) => ({
-  movieId,
-  userId: createdUser.insertedId,
-  status: idx % 2 === 0,
-}));
-
-await (likeCollection as unknown as Collection<Omit<Like, "_id">>).insertMany(
-  likes,
+const createdMovieIds = Object.values(
+  createdMovieResponse.insertedIds,
 );
+// Take half of the created movies, like some, and dislike others
+const likes = createdMovieIds.slice(0, createdMovieIds.length / 2 + 1)
+  .map((
+    movieId,
+    idx,
+  ) => ({
+    movieId,
+    userId: createdUser.insertedId,
+    status: idx % 2 === 0,
+  }));
+
+await (likeCollection as unknown as Collection<Omit<Like, "_id">>)
+  .insertMany(
+    likes,
+  );
 
 await client.close();
 console.log("Successfully seeded database.");

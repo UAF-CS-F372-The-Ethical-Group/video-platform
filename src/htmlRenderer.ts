@@ -4,9 +4,10 @@ import { VNode } from "preact";
 import { render } from "preact-render-to-string";
 import Head from "./components/Head.tsx";
 
-const template =
-  (await readFile(path.join(import.meta.dirname!, "static/.layout.html")))
-    .toString();
+const template = (await readFile(
+  path.join(import.meta.dirname!, "static/.layout.html"),
+))
+  .toString();
 
 export function renderPage(page: VNode) {
   const body = render(page);

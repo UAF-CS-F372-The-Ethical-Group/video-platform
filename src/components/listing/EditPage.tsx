@@ -8,7 +8,11 @@ export default function EditPage({ movie }: { movie: Movie }) {
         <title>Edit Video</title>
       </Head>
       <h1 id="edit-header">Edit Video</h1>
-      <form id="edit-form" action={`/edit/${movie._id}`} method="post">
+      <form
+        id="edit-form"
+        action={`/edit/${movie._id}`}
+        method="post"
+      >
         <label id="title-label">Title:</label>
         <input
           type="text"
@@ -60,7 +64,12 @@ export default function EditPage({ movie }: { movie: Movie }) {
           name="action"
           value="Delete"
         />
-        <input id="submit" type="submit" name="action" value="Save Changes" />
+        <input
+          id="submit"
+          type="submit"
+          name="action"
+          value="Save Changes"
+        />
       </form>
     </>
   );

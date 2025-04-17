@@ -17,7 +17,9 @@ export default function LikeButtons(
         <input
           type="hidden"
           name="action"
-          value={like?.status ? LikeButtonAction.REMOVE : LikeButtonAction.LIKE}
+          value={like?.status
+            ? LikeButtonAction.REMOVE
+            : LikeButtonAction.LIKE}
         />
         <input
           type="submit"

@@ -17,7 +17,10 @@ export function registerGet(_request: Request, response: Response) {
  * Processes registration of new user accounts and seeds the data
  * in the database.
  */
-export async function registerPost(request: Request, response: Response) {
+export async function registerPost(
+  request: Request,
+  response: Response,
+) {
   const { username, password, confirmPassword } = request.body;
 
   const user = await userCollection.findOne({ username });

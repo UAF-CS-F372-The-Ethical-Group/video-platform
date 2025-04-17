@@ -1,12 +1,19 @@
 import { ObjectId } from "mongodb";
-import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
+import {
+  likeCollection,
+  movieCollection,
+  userCollection,
+} from "../mongodb.ts";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import { LikeButtonAction } from "../components/player/LikeButtons.tsx";
 import VideoPage from "../components/player/VideoPage.tsx";
 import { renderPage } from "../htmlRenderer.ts";
 
-export async function playerHandler(request: Request, response: Response) {
+export async function playerHandler(
+  request: Request,
+  response: Response,
+) {
   const user = await userCollection.findOne({
     _id: new ObjectId(request.session.userId),
   });

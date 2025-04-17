@@ -4,7 +4,8 @@ let mounted: Head[] = [];
 
 export default class Head extends Component {
   static rewind() {
-    const state = mounted.map((mount) => mount.props.children ?? []).flat();
+    const state = mounted.map((mount) => mount.props.children ?? [])
+      .flat();
     mounted = [];
     return <>{state}</>;
   }

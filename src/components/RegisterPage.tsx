@@ -17,11 +17,21 @@ export default function RegisterPage() {
         <label id="confirm-password-label" for="confirmPassword">
           Confirm Password:
         </label>
-        <input type="password" id="confirm-password" name="confirmPassword" />
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirmPassword"
+        />
         <br />
-        <input id="submit" type="submit" name="register" value="Register" />
+        <input
+          id="submit"
+          type="submit"
+          name="register"
+          value="Register"
+        />
         <p id="login-redirect">
-          Have an account? <a id="login-link" href="/login.html">Login</a>
+          Have an account?{" "}
+          <a id="login-link" href="/login.html">Login</a>
         </p>
       </form>
     </>

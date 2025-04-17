@@ -40,7 +40,12 @@ export default function UploadPage() {
           required
         />
         <br />
-        <input id="submit" type="submit" name="upload" value="Upload" />
+        <input
+          id="submit"
+          type="submit"
+          name="upload"
+          value="Upload"
+        />
       </form>
     </>
   );

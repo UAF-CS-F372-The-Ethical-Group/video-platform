@@ -19,15 +19,30 @@ function ListingRow(
   return (
     <tr>
       <td>
-        <img src={movie.thumbnailPath} alt={movie.title} width="300" />
+        <img
+          src={movie.thumbnailPath}
+          alt={movie.title}
+          width="300"
+        />
       </td>
       <td>
-        <h3> <a href={`/player.html/?movie=${movie._id}`}>Title: {movie.title}</a></h3>
-        {currentRole !== UserRole.MARKETING
-          ? null
-          : <><div>Likes: {likes.likes}</div><div>Dislikes: {likes.dislikes}</div></>}
+        <h3>
+          <a href={`/player.html/?movie=${movie._id}`}>
+            Title: {movie.title}
+          </a>
+        </h3>
+        {currentRole !== UserRole.MARKETING ? null : (
+          <>
+            <div>Likes: {likes.likes}</div>
+            <div>Dislikes: {likes.dislikes}</div>
+          </>
+        )}
         <form method="POST">
-          <input type="hidden" name="movie" value={movie._id.toString()} />
+          <input
+            type="hidden"
+            name="movie"
+            value={movie._id.toString()}
+          />
           <label for={"comment_" + movie._id}>Comment:</label>
           <textarea
             name="comment"
@@ -45,11 +60,15 @@ function ListingRow(
             hidden={currentRole !== UserRole.MARKETING}
           />
         </form>
-        {currentRole !== UserRole.EDITOR
-          ? null
-          : <form id="edit-button" action={`/edit/${movie._id}`} method="GET">
-              <input id="submit" type="submit" value="Edit" />
-            </form>}
+        {currentRole !== UserRole.EDITOR ? null : (
+          <form
+            id="edit-button"
+            action={`/edit/${movie._id}`}
+            method="GET"
+          >
+            <input id="submit" type="submit" value="Edit" />
+          </form>
+        )}
       </td>
     </tr>
   );
@@ -70,9 +89,15 @@ export default function Listing(
       <h1>Movie Listing</h1>
       {currentRole !== UserRole.EDITOR
         ? null
-        : <form id="upload-button" action="/upload.html" method="GET" >
-            <input id="submit" type="submit" value="Upload New Video" />
-          </form>}
+        : (
+          <form id="upload-button" action="/upload.html" method="GET">
+            <input
+              id="submit"
+              type="submit"
+              value="Upload New Video"
+            />
+          </form>
+        )}
       <table>
         <thead>
           <tr>
