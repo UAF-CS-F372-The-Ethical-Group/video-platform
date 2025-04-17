@@ -1,3 +1,7 @@
+/**
+ * Video player page handling
+ */
+
 import { ObjectId } from "mongodb";
 import {
   likeCollection,
@@ -10,6 +14,15 @@ import { LikeButtonAction } from "../components/player/LikeButtons.tsx";
 import VideoPage from "../components/player/VideoPage.tsx";
 import { renderPage } from "../htmlRenderer.ts";
 
+/**
+ * Handles a request for the player page. It handles the logic for
+ * liking a movie, and for fetching the movie from the database
+ * and calling the jsx component that generates the html
+ * then renders the html for displaying the movie on the player page.
+ * 
+ * @param request 
+ * @param response 
+ */
 export async function playerHandler(
   request: Request,
   response: Response,

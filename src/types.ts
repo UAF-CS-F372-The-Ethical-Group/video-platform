@@ -1,3 +1,7 @@
+/**
+ * Defines all types that are used throughout the video-platform
+ * project
+ */
 import { ObjectId } from "mongodb";
 
 export enum UserRole {

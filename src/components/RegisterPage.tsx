@@ -1,5 +1,12 @@
+/**
+ *  Define components and markup for the register page.
+ */
 import Head from "./Head.tsx";
 
+
+/**
+ *  Generates base layout for the register page.
+ */
 export default function RegisterPage() {
   return (
     <>

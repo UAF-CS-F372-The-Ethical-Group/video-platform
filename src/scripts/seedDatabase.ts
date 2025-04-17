@@ -31,6 +31,7 @@ const createdUser = await userCollection.insertOne({
   role: "viewer",
 });
 
+// Create a user for each of the roles
 const roles = ["viewer", "marketing", "editor"];
 for (const role of roles) {
   await userCollection.insertOne({

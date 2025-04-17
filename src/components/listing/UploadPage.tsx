@@ -1,5 +1,11 @@
+/**
+ *  Defines components and markup for the video upload page.
+ */
 import Head from "../Head.tsx";
 
+/**
+ *  Generates base layout for the upload page.
+ */
 export default function UploadPage() {
   return (
     <>

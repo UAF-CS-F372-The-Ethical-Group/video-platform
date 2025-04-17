@@ -1,3 +1,7 @@
+/**
+ * Contains components pertaining to the backoffice listing pages
+ */
+
 import { Movie, UserRole } from "../../types.ts";
 import Head from "../Head.tsx";
 
@@ -8,6 +12,7 @@ export interface LikeCounts {
 
 export type LikeMap = Map<string, LikeCounts>;
 
+/** Render a row for the given movie */
 function ListingRow(
   { movie, likes, currentRole }: {
     movie: Movie;
@@ -74,6 +79,7 @@ function ListingRow(
   );
 }
 
+/** Render the listing page, with comments and thumbnails */
 export default function Listing(
   { movies, likeMap, currentRole }: {
     movies: Movie[];

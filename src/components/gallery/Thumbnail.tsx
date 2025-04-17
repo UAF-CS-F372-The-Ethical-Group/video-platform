@@ -1,7 +1,8 @@
+/** Contains components pertaining to thumbnails */
 import { Movie } from "../../types.ts";
 
 /**
- * Generates HTML markup for the given movie
+ * Generates HTML markup to render a thumbnail for the given movie
  */
 export default function Thumbnail({ movie }: { movie: Movie }) {
   return (

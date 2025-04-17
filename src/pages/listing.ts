@@ -1,3 +1,8 @@
+/**
+ * Contains logic for the backoffice listing pages, such as commenting
+ * on movies and viewing like counts.
+ */
+
 import { Request, Response } from "express";
 import Listing, {
   LikeMap,
@@ -12,6 +17,9 @@ import {
 import { ObjectId } from "mongodb";
 import { User, UserRole } from "../types.ts";
 
+/**
+ * Render the listing with all movies after a permissions check.
+ */
 export async function getListing(
   request: Request,
   response: Response,
@@ -74,6 +82,9 @@ export async function getListing(
   );
 }
 
+/**
+ * Handle POSTs to the listing page, and check permissions accordingly
+ */
 export async function listingPost(
   request: Request,
   response: Response,

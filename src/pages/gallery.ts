@@ -1,3 +1,7 @@
+/**
+ * Contains logic for data-fetching and handling of gallery functions.
+ */
+
 import { Document, ObjectId } from "mongodb";
 
 import {
