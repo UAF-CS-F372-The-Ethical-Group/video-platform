@@ -14,6 +14,8 @@ import { loginGet, loginPost } from "./pages/login.ts";
 import { registerGet, registerPost } from "./pages/register.ts";
 import { playerHandler } from "./pages/player.ts";
 import { getListing, listingPost } from "./pages/listing.ts";
+import { uploadGet, uploadPost } from "./pages/upload.ts";
+import { editGet, editPost } from "./pages/edit.ts";
 
 declare module "express-session" {
   interface SessionData {
@@ -44,9 +46,13 @@ app.get("/gallery.html", renderGallery);
 app.get("/player.html", playerHandler);
 app.get("/listing.html", getListing);
 app.post("/listing.html", listingPost);
+app.get("/upload.html", uploadGet);
+app.post("/upload.html", uploadPost);
+app.get("/edit/:movieId", editGet);
+app.post("/edit/:movieId", editPost);
 
 app.get("/whoami", (request, response) => {
-  response.setHeader("content-type", "application/json")
+  response.setHeader("content-type", "application/json");
   response.send(request.session).end();
 });
 
