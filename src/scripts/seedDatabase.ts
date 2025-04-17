@@ -17,6 +17,15 @@ const createdUser = await userCollection.insertOne({
   role: "viewer",
 });
 
+const roles = ["viewer", "marketing", "editor"];
+for (const role of roles) {
+  await userCollection.insertOne({
+    username: `${role}@example.com`,
+    password: hashPassword("ABCabc1!"),
+    role,
+  });
+}
+
 const createdMovieResponse =
   await (movieCollection as unknown as Collection<Omit<Movie, "_id">>)
     .insertMany([

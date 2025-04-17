@@ -1,6 +1,6 @@
 import { Document, ObjectId } from "mongodb";
 
-import { likeCollection, movieCollection, userCollection } from "../mongodb.ts";
+import { getMovies, likeCollection, userCollection } from "../mongodb.ts";
 import { Like, Movie } from "../types.ts";
 import { Request, Response } from "express";
 import GalleryPage from "../components/gallery/GalleryPage.tsx";
@@ -48,25 +48,6 @@ async function getFavorites(
 }
 
 /**
- * Fetch all movies, sorted alphabetically
- */
-async function getMovies(filter: string): Promise<Movie[]> {
-  const pipeline: Document[] = [{ $sort: { title: 1 } }];
-  if (filter) {
-    pipeline.unshift({
-      $match: {
-        title: {
-          $regex: filter,
-          $options: "i",
-        },
-      },
-    });
-  }
-  const cursor = await movieCollection.aggregate<Movie>(pipeline);
-  return await cursor.toArray();
-}
-
-/**
  * Checks user authentication and then returns an HTML page with the
  * user's favorite movies, and a list of all movies. They are sorted
  * alphabetically, and filtered according to the `search` query
@@ -86,6 +67,7 @@ export async function renderGallery(request: Request, response: Response) {
   const favoriteMovies = await getFavorites(user._id, searchString);
   const allMovies = await getMovies(searchString);
 
+  response.setHeader("content-type", "text/html")
   response.send(renderPage(
     GalleryPage({
       favorites: favoriteMovies,

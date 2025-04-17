@@ -13,6 +13,7 @@ import { renderGallery } from "./pages/gallery.ts";
 import { loginGet, loginPost } from "./pages/login.ts";
 import { registerGet, registerPost } from "./pages/register.ts";
 import { playerHandler } from "./pages/player.ts";
+import { getListing, listingPost } from "./pages/listing.ts";
 
 declare module "express-session" {
   interface SessionData {
@@ -41,8 +42,11 @@ app.get("/register.html", registerGet);
 app.post("/register.html", registerPost);
 app.get("/gallery.html", renderGallery);
 app.get("/player.html", playerHandler);
+app.get("/listing.html", getListing);
+app.post("/listing.html", listingPost);
 
 app.get("/whoami", (request, response) => {
+  response.setHeader("content-type", "application/json")
   response.send(request.session).end();
 });
 
