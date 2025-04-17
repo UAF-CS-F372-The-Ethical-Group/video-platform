@@ -67,7 +67,7 @@ export async function renderGallery(request: Request, response: Response) {
   const favoriteMovies = await getFavorites(user._id, searchString);
   const allMovies = await getMovies(searchString);
 
-  response.setHeader("content-type", "text/html")
+  response.setHeader("content-type", "text/html");
   response.send(renderPage(
     GalleryPage({
       favorites: favoriteMovies,

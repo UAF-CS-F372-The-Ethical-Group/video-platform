@@ -46,7 +46,7 @@ export async function playerHandler(request: Request, response: Response) {
     likeFilter,
   );
 
-  response.setHeader("content-type", "text/html")
+  response.setHeader("content-type", "text/html");
   response.send(renderPage(
     VideoPage({ movie, like: userLike ?? undefined }),
   )).end();

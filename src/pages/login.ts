@@ -14,7 +14,7 @@ import { User, UserRole } from "../types.ts";
  * Renders the initial login page
  */
 export function loginGet(_request: Request, response: Response) {
-  response.setHeader("content-type", "text/html")
+  response.setHeader("content-type", "text/html");
   response.send(renderPage(LoginPage()));
 }
 

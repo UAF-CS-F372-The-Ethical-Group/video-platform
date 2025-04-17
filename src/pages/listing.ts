@@ -21,7 +21,6 @@ export async function getListing(request: Request, response: Response) {
     return;
   }
 
-
   const movies = await getMovies();
 
   const groupedLikesCursor = likeCollection.aggregate<
@@ -62,7 +61,9 @@ export async function getListing(request: Request, response: Response) {
   }, new Map() as LikeMap);
 
   response.setHeader("content-type", "text/html");
-  response.send(renderPage(Listing({ movies, likeMap, currentRole: user.role })));
+  response.send(
+    renderPage(Listing({ movies, likeMap, currentRole: user.role })),
+  );
 }
 
 export async function listingPost(request: Request, response: Response) {
