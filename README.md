@@ -1,8 +1,9 @@
 # video-platform
 
-## Documentation
+## Design Phase Documents
 
-Documentation is contained in the [docs](./docs) directory.
+Documents required for the design phase of the project are contained
+in the [docs](./docs) directory.
 
 ## Running
 
