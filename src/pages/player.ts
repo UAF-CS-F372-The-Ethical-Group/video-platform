@@ -19,9 +19,9 @@ import { renderPage } from "../htmlRenderer.ts";
  * liking a movie, and for fetching the movie from the database
  * and calling the jsx component that generates the html
  * then renders the html for displaying the movie on the player page.
- * 
- * @param request 
- * @param response 
+ *
+ * @param request
+ * @param response
  */
 export async function playerHandler(
   request: Request,

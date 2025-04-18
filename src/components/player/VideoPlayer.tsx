@@ -8,9 +8,9 @@ import { Movie } from "../../types.ts";
  *  Modularized video player component that injects the given movie
  * data into the html in the form of the file path, title and video
  * mime type
- * 
+ *
  * @param movie
- * @returns 
+ * @returns
  */
 export default function VideoPlayer({ movie }: { movie: Movie }) {
   return (

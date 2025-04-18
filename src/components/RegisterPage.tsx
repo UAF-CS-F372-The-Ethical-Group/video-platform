@@ -3,7 +3,6 @@
  */
 import Head from "./Head.tsx";
 
-
 /**
  *  Generates base layout for the register page.
  */

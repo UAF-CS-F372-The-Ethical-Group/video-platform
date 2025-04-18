@@ -27,7 +27,7 @@ export default class Head extends Component {
 
   /**
    * If the component is unmounted, remove the children from
-   * tracking 
+   * tracking
    */
   override componentWillUnmount() {
     const i = mounted.indexOf(this);

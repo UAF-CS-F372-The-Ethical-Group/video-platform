@@ -9,13 +9,13 @@ import { Like, Movie } from "../../types.ts";
 import Head from "../Head.tsx";
 
 /**
- * Component that displays the video page, takes the movie and the 
- * like data from the data base and then displays that data in the 
+ * Component that displays the video page, takes the movie and the
+ * like data from the data base and then displays that data in the
  * html that is sent to the client.
- * 
+ *
  * @param movie
  * @param Like
- * @returns 
+ * @returns
  */
 export default function VideoPage(
   { movie, like }: { movie: Movie; like?: Like },

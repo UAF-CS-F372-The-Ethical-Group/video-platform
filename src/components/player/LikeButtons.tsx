@@ -11,12 +11,11 @@ export enum LikeButtonAction {
 }
 
 /**
- * 
  * Generates html with data for the like button injected into it.
- * 
+ *
  * @param movie
- * @param Like 
- * @returns 
+ * @param Like
+ * @returns
  */
 
 export default function LikeButtons(
