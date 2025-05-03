@@ -3,14 +3,15 @@
  * the database.
  */
 
-import { Collection, Document, MongoClient } from "mongodb";
+import { Collection, Db, Document, MongoClient } from "mongodb";
 import { Movie } from "./types.ts";
 
 /** MongoDB client used to connect to MongoDB */
 export const client: MongoClient = new MongoClient(
   Deno.env.get("MONGODB_URI") ?? "mongodb://localhost:27017",
 );
-const db = client.db("video-platform");
+/** MongoDB database for all collections */
+export const db: Db = client.db("video-platform");
 /** MongoDB collection for users */
 export const userCollection: Collection = db.collection("users");
 /** MongoDB collection for movies */
