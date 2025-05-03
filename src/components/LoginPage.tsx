@@ -1,12 +1,13 @@
 /**
  *  Define components and markup for the login page.
  */
+import { VNode } from "preact";
 import Head from "./Head.tsx";
 
 /**
  *  Generates the base layout for the login page.
  */
-export default function LoginPage() {
+export default function LoginPage(): VNode {
   return (
     <>
       <Head>

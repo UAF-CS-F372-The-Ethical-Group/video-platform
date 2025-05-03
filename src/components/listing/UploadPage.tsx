@@ -1,12 +1,13 @@
 /**
  *  Defines components and markup for the video upload page.
  */
+import { VNode } from "preact";
 import Head from "../Head.tsx";
 
 /**
  *  Generates base layout for the upload page.
  */
-export default function UploadPage() {
+export default function UploadPage(): VNode {
   return (
     <>
       <Head>

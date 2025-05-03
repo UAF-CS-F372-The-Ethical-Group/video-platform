@@ -3,7 +3,7 @@
  * a page from within a component.
  */
 
-import { Component } from "preact";
+import { Component, VNode } from "preact";
 
 let mounted: Head[] = [];
 
@@ -13,7 +13,7 @@ let mounted: Head[] = [];
  */
 export default class Head extends Component {
   /** Return all children and reset the list */
-  static rewind() {
+  static rewind(): VNode {
     const state = mounted.map((mount) => mount.props.children ?? [])
       .flat();
     mounted = [];
@@ -35,7 +35,7 @@ export default class Head extends Component {
   }
 
   /** Do not render any markup for this compoenent. */
-  render() {
+  render(): null {
     return null;
   }
 }

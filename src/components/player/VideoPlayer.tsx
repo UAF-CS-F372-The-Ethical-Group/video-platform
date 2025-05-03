@@ -2,6 +2,7 @@
  * JSX component that handles displaying the movie to the user
  */
 
+import { VNode } from "preact";
 import { Movie } from "../../types.ts";
 
 /**
@@ -12,7 +13,7 @@ import { Movie } from "../../types.ts";
  * @param movie
  * @returns
  */
-export default function VideoPlayer({ movie }: { movie: Movie }) {
+export default function VideoPlayer({ movie }: { movie: Movie }): VNode {
   return (
     <div id="video_player">
       <h1>{movie.title}</h1>

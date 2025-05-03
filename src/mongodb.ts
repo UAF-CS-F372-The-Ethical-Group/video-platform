@@ -3,16 +3,20 @@
  * the database.
  */
 
-import { Document, MongoClient } from "mongodb";
+import { Collection, Document, MongoClient } from "mongodb";
 import { Movie } from "./types.ts";
 
-export const client = new MongoClient(
+/** MongoDB client used to connect to MongoDB */
+export const client: MongoClient = new MongoClient(
   Deno.env.get("MONGODB_URI") ?? "mongodb://localhost:27017",
 );
-export const db = client.db("video-platform");
-export const userCollection = db.collection("users");
-export const movieCollection = db.collection("movies");
-export const likeCollection = db.collection("likes");
+const db = client.db("video-platform");
+/** MongoDB collection for users */
+export const userCollection: Collection = db.collection("users");
+/** MongoDB collection for movies */
+export const movieCollection: Collection = db.collection("movies");
+/** MongoDB collection for likes */
+export const likeCollection: Collection = db.collection("likes");
 
 /**
  * Fetch all movies, sorted alphabetically

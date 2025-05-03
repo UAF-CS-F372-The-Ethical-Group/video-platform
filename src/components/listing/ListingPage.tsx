@@ -2,14 +2,19 @@
  * Contains components pertaining to the backoffice listing pages
  */
 
+import { VNode } from "preact";
 import { Movie, UserRole } from "../../types.ts";
 import Head from "../Head.tsx";
 
+/** An object representing the number of likes on a video */
 export interface LikeCounts {
+  /** The number of likes */
   likes: number;
+  /** The number of dislikes */
   dislikes: number;
 }
 
+/** A map of like counts according to video id */
 export type LikeMap = Map<string, LikeCounts>;
 
 /** Render a row for the given movie */
@@ -86,7 +91,7 @@ export default function Listing(
     likeMap: LikeMap;
     currentRole: UserRole;
   },
-) {
+): VNode {
   return (
     <>
       <Head>

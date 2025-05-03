@@ -17,7 +17,7 @@ const template = (await readFile(
 /**
  * Given a VNode, render it to a string and inject into the layout template
  */
-export function renderPage(page: VNode) {
+export function renderPage(page: VNode): string {
   const body = render(page);
   const head = render(Head.rewind());
   return template.replace("<!-- SLOT-LAYOUT-HEAD -->", head).replace(

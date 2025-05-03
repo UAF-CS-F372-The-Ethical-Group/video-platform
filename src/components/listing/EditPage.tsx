@@ -1,13 +1,14 @@
 /**
  *  Defines components and markup for the edit video page.
  */
+import { VNode } from "preact";
 import { Movie } from "../../types.ts";
 import Head from "../Head.tsx";
 
 /**
  *  Generates the base layout for the edit page.
  */
-export default function EditPage({ movie }: { movie: Movie }) {
+export default function EditPage({ movie }: { movie: Movie }): VNode {
   return (
     <>
       <Head>

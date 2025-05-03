@@ -1,9 +1,20 @@
 # video-platform
 
+## Features
+- Video streaming
+
+  Users are able to view a listing of all videos on the platform. A search box above the video listing allows users to filter videos based on their title.
+- Content management
+
+  Content editors are able to easily and effeciently upload, edit, and delete content from the platform using the content management pages.
+- Marketing feedback
+
+  Marketing managers are able to view like and dislike statistics on each video, as well as leave a comment with feedback for content editors. Content editors are then able to view this feedback to help influence content choices.
+
 ## Design Phase Documents
 
 Documents required for the design phase of the project are contained
-in the [docs](./docs) directory.
+in the [docs](./docs) directory. Developer documentation can be viewed in [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## Running
 
@@ -13,6 +24,11 @@ repository. The `docker-compose.yaml` will start a mongodb server
 alongside the application server and automatically populate it with
 information.
 
+### Prerequisites
+- A computer or server running Docker
+- Docker compose
+
+### Setup
 ```bash
 # Clone the project repository
 git clone https://github.com/UAF-CS-F372-The-Ethical-Group/video-platform.git
@@ -73,37 +89,4 @@ deno lint src/**/*.{ts,tsx}
 
 # Type check all files
 deno check src/**/*.{ts,tsx}
-```
-
-## Database schema
-
-### User collection
-
-- username
-- password (hashed)
-- failedLoginAttempts (integer, optional)
-- role (either "viewer", "marketing", or "editor")
-
-### Movies collection
-
-- title
-- genre
-- videoPath
-- thumbnailPath
-
-### Like collection
-
-- userId (user._id)
-- movieId (movie._id)
-- status (boolean, true = liked, false = disliked)
-
-## Session data schema
-
-The user session, available on `request.session` inside a route
-handler, has the following properties:
-
-```ts
-interface Session {
-  userId: string; // The ID of the currently authenticated user
-}
 ```

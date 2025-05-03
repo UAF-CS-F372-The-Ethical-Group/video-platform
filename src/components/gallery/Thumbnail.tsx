@@ -1,10 +1,11 @@
 /** Contains components pertaining to thumbnails */
+import { VNode } from "preact";
 import { Movie } from "../../types.ts";
 
 /**
  * Generates HTML markup to render a thumbnail for the given movie
  */
-export default function Thumbnail({ movie }: { movie: Movie }) {
+export default function Thumbnail({ movie }: { movie: Movie }): VNode {
   return (
     <div className="movie">
       <a href={`/player.html?movie=${movie._id}`}>

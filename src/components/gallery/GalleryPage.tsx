@@ -1,6 +1,7 @@
 /**
  * Define components and markup for the gallery page
  */
+import { VNode } from "preact";
 import { Movie } from "../../types.ts";
 import Head from "../Head.tsx";
 import Thumbnail from "./Thumbnail.tsx";
@@ -14,7 +15,7 @@ export default function GalleryPage(
     movies: Movie[];
     search?: string;
   },
-) {
+): VNode {
   return (
     <>
       <Head>

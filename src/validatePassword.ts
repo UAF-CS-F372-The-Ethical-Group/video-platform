@@ -5,7 +5,7 @@
 /**
  * Validates the complexity of the provided password
  */
-export default function validatePassword(password: string) {
+export default function validatePassword(password: string): boolean {
   const lowercaseRegex = /[a-z]/;
   const uppercaseRegex = /[A-Z]/;
   const numberRegex = /[0-9]/;

@@ -2,8 +2,10 @@
  * Contains definitions for the like button component
  */
 
+import { VNode } from "preact";
 import { Like, Movie } from "../../types.ts";
 
+/** Defines the actions that are able to be taken by the like button form */
 export enum LikeButtonAction {
   LIKE = "like",
   DISLIKE = "dislike",
@@ -20,7 +22,7 @@ export enum LikeButtonAction {
 
 export default function LikeButtons(
   { movie, like }: { movie: Movie; like?: Like },
-) {
+): VNode {
   const movieId = movie._id.toString();
   return (
     <div>

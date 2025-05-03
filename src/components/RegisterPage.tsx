@@ -1,12 +1,13 @@
 /**
  *  Define components and markup for the register page.
  */
+import {VNode } from "preact"
 import Head from "./Head.tsx";
 
 /**
  *  Generates base layout for the register page.
  */
-export default function RegisterPage() {
+export default function RegisterPage(): VNode {
   return (
     <>
       <Head>

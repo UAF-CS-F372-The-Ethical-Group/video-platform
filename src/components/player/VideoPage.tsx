@@ -7,6 +7,7 @@ import LikeButtons from "./LikeButtons.tsx";
 import VideoPlayer from "./VideoPlayer.tsx";
 import { Like, Movie } from "../../types.ts";
 import Head from "../Head.tsx";
+import { VNode } from "preact";
 
 /**
  * Component that displays the video page, takes the movie and the
@@ -19,7 +20,7 @@ import Head from "../Head.tsx";
  */
 export default function VideoPage(
   { movie, like }: { movie: Movie; like?: Like },
-) {
+): VNode {
   return (
     <>
       <Head>
