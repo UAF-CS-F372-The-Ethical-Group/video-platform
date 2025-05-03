@@ -27,4 +27,4 @@ locations:
 | Page Renderers   | `src/components/*.tsx` |
 | MongoDB          | `src/mongodb.ts`       |
 
-Documenation for various functions is available at https://uaf-cs-f372-the-ethical-group.github.io/video-platform
+Documenation for various functions is available at [https://uaf-cs-f372-the-ethical-group.github.io/video-platform/code-doc/](https://uaf-cs-f372-the-ethical-group.github.io/video-platform/code-doc/all_symbols.html)
